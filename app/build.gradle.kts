@@ -31,11 +31,11 @@ android {
     }
 
     defaultConfig {
-        applicationId = "io.github.jqssun.airplay"
+        applicationId = "io.github.sudnep.sideplay"
         minSdk = 24
         targetSdk = 36
-        versionCode = 31
-        versionName = "0.0.31"
+        versionCode = 1
+        versionName = "0.1.0"
 
         externalNativeBuild {
             cmake {
@@ -92,6 +92,7 @@ android {
     buildFeatures {
         compose = true
         prefab = true
+        buildConfig = true
     }
 }
 
@@ -147,4 +148,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
+
+    testImplementation(libs.junit)
 }

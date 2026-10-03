@@ -12,8 +12,10 @@ datastore = "1.1.1"
 coroutines = "1.9.0"
 media3 = "1.11.0-beta01"
 oboe = "1.9.3"
+junit = "4.13.2"
 
 [libraries]
+junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activity-compose" }
 androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }

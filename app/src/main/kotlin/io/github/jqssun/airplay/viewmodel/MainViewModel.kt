@@ -11,6 +11,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.media3.common.Player
 import io.github.jqssun.airplay.Prefs
+import io.github.jqssun.airplay.ServerName
 import io.github.jqssun.airplay.audio.TrackInfo
 import io.github.jqssun.airplay.service.AirPlayService
 import io.github.jqssun.airplay.service.AirPlayService.ServerState
@@ -104,7 +105,7 @@ class MainViewModel @Inject constructor(app: Application) : AndroidViewModel(app
     private val _videoResolution = MutableStateFlow("")
     val videoResolution: StateFlow<String> = _videoResolution.asStateFlow()
 
-    private val _serverName = MutableStateFlow(prefs.getString(Prefs.SERVER_NAME, Prefs.DEF_SERVER_NAME)!!)
+    private val _serverName = MutableStateFlow(prefs.getString(Prefs.SERVER_NAME, null) ?: ServerName.default(app))
     val serverName: StateFlow<String> = _serverName.asStateFlow()
 
     // settings

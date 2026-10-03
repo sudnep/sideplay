@@ -15,5 +15,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "AirPlayServer"
+rootProject.name = "Sideplay"
 include(":app")

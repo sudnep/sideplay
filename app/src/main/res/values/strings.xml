@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">AirPlay Server</string>
+    <string name="app_name">Sideplay</string>
 
     <!-- Notification -->
     <string name="notification_channel">AirPlay Service</string>
-    <string name="notification_title">AirPlay Server Running</string>
+    <string name="notification_title">Sideplay is running</string>
     <string name="notification_text">Accepting AirPlay connections</string>
     <string name="notification_pin_title">AirPlay PIN Required</string>
     <string name="notification_pin_text">PIN: %1$s</string>

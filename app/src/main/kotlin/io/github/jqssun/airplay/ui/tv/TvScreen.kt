@@ -20,10 +20,10 @@ data class TvSession(
     val pinCode: String?,
 )
 
-// pin first: pairing can't complete unless the code is visible. uxplay counts the connection
-// before asking for a pin, and the service keeps a cancelled pin, so require a live connection
+// pin first: pairing can't complete unless the code is visible. no connection check: the iphone
+// closes the connection that requested the pin before the user types it (TvPinScreen times out instead)
 fun resolveTvScreen(s: TvSession): TvScreen = when {
-    s.pinCode != null && s.connectionCount > 0 -> TvScreen.Pin(s.pinCode)
+    s.pinCode != null -> TvScreen.Pin(s.pinCode)
     s.videoPlaybackActive || s.videoSessionPending -> TvScreen.Video
     s.mirroringActive && !s.audioOnly -> TvScreen.Mirroring
     s.audioOnly && s.connectionCount > 0 -> TvScreen.Audio

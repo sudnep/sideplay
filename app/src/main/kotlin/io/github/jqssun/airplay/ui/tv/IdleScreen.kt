@@ -25,8 +25,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.jqssun.airplay.R
 import io.github.jqssun.airplay.ui.requestFocusUntilLanded
+import kotlinx.coroutines.delay
 
 val TvBackground = Color(0xFF101418)
+const val PIN_TIMEOUT_MS = 120_000L
 private val TvMuted = Color.White.copy(alpha = 0.7f)
 
 @Composable
@@ -108,6 +110,11 @@ private fun Step(n: Int, text: String) {
 @Composable
 fun TvPinScreen(code: String, onDismiss: () -> Unit) {
     BackHandler { onDismiss() }
+    // the service keeps a cancelled pin until a stream starts; give up after a while
+    LaunchedEffect(code) {
+        delay(PIN_TIMEOUT_MS)
+        onDismiss()
+    }
     Box(Modifier.fillMaxSize().background(TvBackground), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(24.dp)) {
             Text(stringResource(R.string.tv_pin_title), style = MaterialTheme.typography.headlineMedium, color = TvMuted)

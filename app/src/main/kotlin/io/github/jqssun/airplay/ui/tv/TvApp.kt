@@ -104,8 +104,6 @@ fun TvApp(
     val screen = resolveTvScreen(TvSession(firstRunDone, connections, mirroring, audioOnly, videoActive, videoPending, pinCode))
     // a session ends any settings visit, so the next idle starts at home
     LaunchedEffect(screen !is TvScreen.Idle) { if (screen !is TvScreen.Idle) route = TvRoute.HOME }
-    // the service only clears a pin when a stream starts; a cancelled pairing must not leave it behind
-    LaunchedEffect(connections) { if (connections == 0) viewModel.dismissPin() }
 
     val playbackSurface: @Composable () -> Unit = {
         val aspect by viewModel.videoPlaybackAspect.collectAsState()

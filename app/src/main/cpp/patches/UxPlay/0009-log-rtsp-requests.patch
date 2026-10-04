@@ -1,0 +1,16 @@
+diff --git a/lib/raop.c b/lib/raop.c
+index 3b6463d..eb85595 100644
+--- a/lib/raop.c
++++ b/lib/raop.c
+@@ -497,6 +497,11 @@ conn_request(void *ptr, http_request_t *request, http_response_t **response) {
+             }
+         }
+     }
++    if (!strcmp(protocol, "RTSP/1.0") && strcmp(method, "GET_PARAMETER") && strcmp(method, "SET_PARAMETER")) {
++        const char *cap_ct = http_request_get_header(request, "Content-Type");
++        logger_log(raop->logger, LOGGER_ERR, "AIRCAP RTSP %s %s handled=%d ct=%s",
++                   method, url, handler != NULL, cap_ct ? cap_ct : "-");
++    }
+ #endif
+ 
+     if (handler != NULL) {

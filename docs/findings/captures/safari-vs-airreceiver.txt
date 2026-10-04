@@ -1,0 +1,57 @@
+# Direct-URL video (Messages in-app browser, 11:48) vs Safari app (11:54-11:56, PIN on then off), redacted
+10-04 11:48:10.830 I/AirPlayService(17729): Client connected (1)
+10-04 11:48:10.911 D/AirPlayService(17729): client volume query: 6/100 -> -28.2dB
+10-04 11:48:15.824 I/AirPlayService(17729): Client connected (2)
+10-04 11:48:15.854 I/AirPlayNative(17729): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 11:48:15.869 I/AirPlayService(17729): Client connected (3)
+10-04 11:48:15.907 I/AirPlayNative(17729): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 11:48:15.911 I/AirPlayNative(17729): AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 11:48:15.911 I/AirPlayNative(17729): AIRCAP PLAY proc=MobileSMS start=3.2 body=bplist location=https://test-videos.co.uk/<path>
+10-04 11:48:15.916 I/AirPlayService(17729): AirPlay Video play: https://test-videos.co.uk/<path> @ 3.226769s
+10-04 11:48:16.125 W/AirPlayVideoPlayer(17729): AIRCAP TRACK type=2 selected=true container=video/mp4 sample=video/avc codecs=avc1.640033 1920x1080
+10-04 11:48:16.175 I/AirPlayNative(17729): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 11:48:16.222 I/AirPlayNative(17729): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 11:48:16.226 I/AirPlayNative(17729): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 11:48:16.234 I/AirPlayNative(17729): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 11:48:16.251 I/AirPlayNative(17729): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 11:48:18.872 I/AirPlayNative(17729): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 11:48:24.085 I/AirPlayService(17729): AirPlay Video stopped (player)
+10-04 11:48:24.259 I/AirPlayService(17729): Client disconnected (2)
+10-04 11:48:24.262 I/AirPlayService(17729): Client disconnected (1)
+10-04 11:48:25.331 I/AirPlayService(17729): Client connected (2)
+10-04 11:48:25.404 I/AirPlayNative(17729): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 11:48:25.468 I/AirPlayService(17729): Client connected (3)
+10-04 11:48:25.500 I/AirPlayNative(17729): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 11:48:25.504 I/AirPlayNative(17729): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 11:48:25.508 I/AirPlayService(17729): Client disconnected (2)
+10-04 11:48:25.511 I/AirPlayService(17729): Client disconnected (1)
+10-04 11:48:25.605 I/AirPlayService(17729): Client connected (2)
+10-04 11:48:25.692 I/AirPlayNative(17729): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 11:48:25.739 I/AirPlayService(17729): Client connected (3)
+10-04 11:48:25.789 I/AirPlayNative(17729): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 11:48:25.795 I/AirPlayNative(17729): AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 11:48:25.795 I/AirPlayNative(17729): AIRCAP PLAY proc=MobileSMS start=0.0 body=bplist location=https://test-videos.co.uk/<path>
+10-04 11:48:25.802 I/AirPlayService(17729): AirPlay Video play: https://test-videos.co.uk/<path> @ 0.0s
+10-04 11:48:25.955 W/AirPlayVideoPlayer(17729): AIRCAP TRACK type=2 selected=true container=video/mp4 sample=video/avc codecs=avc1.640033 1920x1080
+10-04 11:48:25.968 I/AirPlayService(17729): AirPlay Video stopped
+10-04 11:48:25.974 I/AirPlayService(17729): Client disconnected (2)
+10-04 11:48:25.980 I/AirPlayService(17729): Client disconnected (1)
+10-04 11:53:21.052 D/NsdService( 3429): Client disconnected
+10-04 11:53:29.098 I/AirPlayService(22323): Server started on port 7000
+10-04 11:54:02.703 I/AirPlayService(22323): Client connected (1)
+10-04 11:54:02.787 I/AirPlayNative(22323): Client Authentication Failure (client proof not validated)
+10-04 11:54:02.797 I/AirPlayService(22323): Client disconnected (0)
+10-04 11:54:02.840 I/AirPlayService(22323): Client connected (1)
+10-04 11:54:02.905 I/AirPlayNative(22323): Client Authentication Failure (client proof not validated)
+10-04 11:54:02.964 I/AirPlayService(22323): Client disconnected (0)
+10-04 11:54:51.972 I/AirPlayService(22323): Client connected (1)
+10-04 11:54:52.016 I/AirPlayService(22323): Client disconnected (0)
+10-04 11:54:57.883 I/AirPlayService(22323): Client connected (1)
+10-04 11:54:58.041 I/AirPlayService(22323): PIN pairing completed
+10-04 11:54:58.049 I/AirPlayNative(22323): registered client pk (slot 1)
+10-04 11:54:58.059 D/AirPlayService(22323): client volume query: 6/100 -> -28.2dB
+10-04 11:55:57.640 I/AirPlayService(22323): Client disconnected (0)
+10-04 11:55:57.656 I/AirPlayService(22323): Server stopped
+10-04 11:55:57.686 I/AirPlayService(22323): Server started on port 7000
+10-04 11:56:08.722 I/AirPlayService(22323): Client connected (1)
+10-04 11:56:08.766 D/AirPlayService(22323): client volume query: 6/100 -> -28.2dB

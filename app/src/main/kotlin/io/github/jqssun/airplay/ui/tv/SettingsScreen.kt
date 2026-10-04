@@ -14,6 +14,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
@@ -43,7 +45,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.jqssun.airplay.R
 import io.github.jqssun.airplay.ServerName
-import io.github.jqssun.airplay.ui.dpadFocus
 import io.github.jqssun.airplay.ui.requestFocusUntilLanded
 import kotlinx.coroutines.launch
 
@@ -77,9 +78,11 @@ fun TvSettingsScreen(
     LaunchedEffect(Unit) { firstRow.requestFocusUntilLanded() }
     BackHandler(enabled = !renaming) { onBack() }
 
+    // scrolls so rows keep their height on short screens; focus brings rows into view
     Column(
-        modifier = Modifier.fillMaxSize().background(TvBackground).padding(horizontal = 96.dp, vertical = 48.dp),
-        verticalArrangement = Arrangement.spacedBy(12.dp),
+        modifier = Modifier.fillMaxSize().background(TvBackground).verticalScroll(rememberScrollState())
+            .padding(horizontal = 96.dp, vertical = 48.dp),
+        verticalArrangement = Arrangement.spacedBy(4.dp),
     ) {
         Text(stringResource(R.string.tv_settings), style = MaterialTheme.typography.displaySmall, color = Color.White)
         SettingRow(stringResource(R.string.tv_setting_name), "setting_name", Modifier.focusRequester(firstRow), onClick = { renaming = true }) {
@@ -107,7 +110,7 @@ private fun SettingRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .dpadFocus(RoundedCornerShape(12.dp))
+            .tvFocus(RoundedCornerShape(12.dp))
             .clickable(onClick = onClick)
             .padding(horizontal = 24.dp, vertical = 16.dp)
             .testTag(tag),
@@ -142,11 +145,11 @@ private fun RenameDialog(current: String, onDismiss: () -> Unit, onSave: (String
             TextButton(
                 onClick = { onSave(ServerName.choose(text, null, null)) },
                 enabled = text.isNotBlank(),
-                modifier = Modifier.dpadFocus().testTag("rename_save"),
+                modifier = Modifier.tvFocus().testTag("rename_save"),
             ) { Text(stringResource(R.string.tv_save)) }
         },
         dismissButton = {
-            TextButton(onClick = onDismiss, modifier = Modifier.dpadFocus()) { Text(stringResource(R.string.tv_cancel)) }
+            TextButton(onClick = onDismiss, modifier = Modifier.tvFocus()) { Text(stringResource(R.string.tv_cancel)) }
         },
     )
 }

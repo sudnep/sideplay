@@ -3,6 +3,8 @@ package io.github.jqssun.airplay.ui.tv
 import androidx.activity.ComponentActivity
 import androidx.compose.ui.input.key.Key
 import androidx.compose.ui.test.ExperimentalTestApi
+import androidx.compose.ui.test.assertHeightIsAtLeast
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsFocused
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.assertTextContains
@@ -15,6 +17,7 @@ import androidx.compose.ui.test.performKeyInput
 import androidx.compose.ui.test.performScrollToNode
 import androidx.compose.ui.test.performTextReplacement
 import androidx.compose.ui.test.pressKey
+import androidx.compose.ui.unit.dp
 import io.github.jqssun.airplay.ServerName
 import org.junit.Assert.assertEquals
 import org.junit.Rule
@@ -37,7 +40,8 @@ class SettingsScreenTest {
         rule.onNodeWithTag("setting_name").assertIsFocused()
         listOf("setting_pin", "setting_boot", "setting_h265", "setting_troubleshooting").forEach { tag ->
             rule.onNode(isFocused()).performKeyInput { pressKey(Key.DirectionDown) }
-            rule.onNodeWithTag(tag).assertIsFocused()
+            // focused but squashed or clipped off-screen is unusable on a tv
+            rule.onNodeWithTag(tag).assertIsFocused().assertIsDisplayed().assertHeightIsAtLeast(56.dp)
         }
     }
 

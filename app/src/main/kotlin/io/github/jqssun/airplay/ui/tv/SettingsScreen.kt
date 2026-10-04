@@ -40,6 +40,7 @@ import androidx.compose.ui.input.key.KeyEventType
 import androidx.compose.ui.input.key.key
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import androidx.compose.ui.input.key.type
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
@@ -196,6 +197,7 @@ fun TvTroubleshootingScreen(state: TvTroubleshootingState, onBack: () -> Unit) {
         item { Text(stringResource(R.string.tv_ts_license), color = muted) }
         item { Text(stringResource(R.string.tv_ts_credits), color = muted) }
         item { Text(stringResource(R.string.tv_ts_disclaimer), color = muted, modifier = Modifier.testTag("ts_disclaimer")) }
+        item { Text(stringResource(R.string.tv_ts_overlay_adb, LocalContext.current.packageName), color = muted) }
         item { Section(stringResource(R.string.tv_ts_logs)) }
         items(state.logs.takeLast(TROUBLESHOOTING_LOG_LINES)) { line ->
             Text(line, style = MaterialTheme.typography.bodySmall, color = Color.White.copy(alpha = 0.6f))

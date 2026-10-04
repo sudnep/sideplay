@@ -79,6 +79,17 @@ fun TvIdleScreen(
                     color = TvMuted,
                     modifier = Modifier.testTag("keep_open_note"),
                 )
+                OverlayAccess.GUIDED -> Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Button(onClick = onAllowAutoOpen, modifier = Modifier.tvFocus().testTag("open_app_settings")) {
+                        Text(stringResource(R.string.tv_idle_open_app_settings))
+                    }
+                    Text(
+                        stringResource(R.string.tv_idle_overlay_steps),
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = TvMuted,
+                        modifier = Modifier.testTag("overlay_steps"),
+                    )
+                }
                 OverlayAccess.GRANTED -> Unit
             }
         }

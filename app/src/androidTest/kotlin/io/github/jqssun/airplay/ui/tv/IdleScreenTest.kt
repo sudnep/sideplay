@@ -76,4 +76,12 @@ class IdleScreenTest {
         rule.setContent { TvPinScreen("4821", onDismiss = {}) }
         rule.onNodeWithTag("pin_code").assertTextContains("4821")
     }
+
+    @Test fun guidedShowsAppSettingsButtonAndSteps() {
+        var opened = false
+        show(access = OverlayAccess.GUIDED, onAllow = { opened = true })
+        rule.onNodeWithTag("open_app_settings").assertIsDisplayed().performClick()
+        assertTrue(opened)
+        rule.onNodeWithTag("overlay_steps").assertTextContains("Special app access", substring = true)
+    }
 }

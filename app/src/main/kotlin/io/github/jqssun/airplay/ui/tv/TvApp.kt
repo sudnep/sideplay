@@ -1,5 +1,6 @@
 package io.github.jqssun.airplay.ui.tv
 
+import android.content.Intent
 import android.view.Surface
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -132,7 +133,11 @@ fun TvApp(
                     connecting = connecting,
                     overlayAccess = overlayAccess,
                     onOpenSettings = { route = TvRoute.SETTINGS },
-                    onAllowAutoOpen = { runCatching { context.startActivity(OverlayPermission.intent(context)) } },
+                    onAllowAutoOpen = {
+                        OverlayPermission.intentFor(context, overlayAccess)?.let {
+                            runCatching { context.startActivity(it.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)) }
+                        }
+                    },
                     receiverError = serverState == ServerState.ERROR,
                     onRetry = { viewModel.startServer() },
                 )

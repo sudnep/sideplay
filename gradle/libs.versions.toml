@@ -15,11 +15,13 @@ oboe = "1.9.3"
 junit = "4.13.2"
 androidx-test-runner = "1.6.2"
 androidx-test-ext-junit = "1.2.1"
+androidx-test-espresso = "3.6.1"
 
 [libraries]
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "androidx-test-runner" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidx-test-ext-junit" }
+androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "androidx-test-espresso" }
 compose-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }

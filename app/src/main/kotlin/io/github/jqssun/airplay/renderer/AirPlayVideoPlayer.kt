@@ -13,6 +13,7 @@ import androidx.media3.common.Player
 import androidx.media3.common.Timeline
 import androidx.media3.common.VideoSize
 import androidx.media3.exoplayer.ExoPlayer
+import io.github.jqssun.airplay.BuildConfig
 
 // rate is 0 while buffering; speed is the configured rate regardless of pause state
 // native reads the effective rate, overlay reads playWhenReady + speed + skipSilence
@@ -49,6 +50,9 @@ class AirPlayVideoPlayer(private val context: Context) {
     private val _listener = object : Player.Listener {
         override fun onPlayerError(error: androidx.media3.common.PlaybackException) {
             Log.w(TAG, "playback error", error)
+            if (BuildConfig.DEBUG) {
+                Log.w(TAG, "AIRCAP PLAYER_ERROR code=${error.errorCodeName} msg=${error.message} cause=${error.cause}")
+            }
             onEnded?.invoke()
         }
         override fun onPlaybackStateChanged(state: Int) {

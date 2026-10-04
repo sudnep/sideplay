@@ -1,0 +1,59 @@
+diff --git a/lib/http_handlers.h b/lib/http_handlers.h
+index 7123c96..1e7afb3 100644
+--- a/lib/http_handlers.h
++++ b/lib/http_handlers.h
+@@ -777,6 +777,22 @@ http_handler_play(raop_conn_t *conn, http_request_t *request, http_response_t *r
+         goto play_error;
+     }
+ 
++#ifndef NDEBUG
++    {
++        char *cap_proc = NULL;
++        plist_t cap_proc_node = req_root_node ? plist_dict_get_item(req_root_node, "clientProcName") : NULL;
++        if (cap_proc_node) {
++            plist_get_string_val(cap_proc_node, &cap_proc);
++        }
++        logger_log(raop->logger, LOGGER_ERR, "AIRCAP PLAY proc=%s start=%.1f body=%s location=%s",
++                   cap_proc ? cap_proc : "-", start_position_seconds,
++                   data_is_binary_plist ? "bplist" : "text", playback_location);
++        if (cap_proc) {
++            plist_mem_free(cap_proc);
++        }
++    }
++#endif
++
+     if (!playback_uuid) {
+         playback_uuid = strdup(apple_session_id);
+     }
+diff --git a/lib/raop.c b/lib/raop.c
+index c86393f..ce731b2 100644
+--- a/lib/raop.c
++++ b/lib/raop.c
+@@ -478,6 +478,27 @@ conn_request(void *ptr, http_request_t *request, http_response_t **response) {
+         handler = &http_handler_hls;
+     }
+ 
++#ifndef NDEBUG
++    /* AIRCAP: request capture for receiver development (debug builds only) */
++    if (!strcmp(protocol, "HTTP/1.1") && strcmp(url, "/playback-info")) {
++        const char *cap_ua = http_request_get_header(request, "User-Agent");
++        const char *cap_ct = http_request_get_header(request, "Content-Type");
++        logger_log(raop->logger, LOGGER_ERR, "AIRCAP REQ %s %s handled=%d hls=%d ua=%s ct=%s",
++                   method, url, handler != NULL, hls_request, cap_ua ? cap_ua : "-", cap_ct ? cap_ct : "-");
++        if (handler == NULL) {
++            char *cap_hdr = NULL;
++            http_request_get_header_string(request, &cap_hdr);
++            if (cap_hdr) {
++                for (char *p = cap_hdr; *p; p++) {
++                    if (*p == '\r' || *p == '\n') *p = ' ';
++                }
++                logger_log(raop->logger, LOGGER_ERR, "AIRCAP UNHANDLED_HEADERS %s", cap_hdr);
++                free(cap_hdr);
++            }
++        }
++    }
++#endif
++
+     if (handler != NULL) {
+         handler(conn, request, *response, &response_data, &response_datalen);
+     } else {

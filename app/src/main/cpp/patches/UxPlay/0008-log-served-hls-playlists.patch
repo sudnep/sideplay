@@ -1,0 +1,59 @@
+diff --git a/lib/http_handlers.h b/lib/http_handlers.h
+index 1e7afb3..1ab522e 100644
+--- a/lib/http_handlers.h
++++ b/lib/http_handlers.h
+@@ -963,6 +963,34 @@ http_handler_play(raop_conn_t *conn, http_request_t *request, http_response_t *r
+    Media Playlist, taken from the Master Playlist, with the uri prefix removed.  
+ */ 
+ 
++#ifndef NDEBUG
++/* AIRCAP: log a served playlist line by line (debug only); query strings may carry signed tokens */
++static void aircap_log_playlist(raop_t *raop, const char *kind, const char *url, const char *text) {
++    char line[512];
++    int n = 0;
++    const char *p = text;
++    while (p && *p && n < 80) {
++        const char *eol = strchr(p, '\n');
++        size_t len = eol ? (size_t) (eol - p) : strlen(p);
++        size_t o = 0;
++        for (size_t i = 0; i < len && o < sizeof(line) - 1; i++) {
++            if (p[i] == '?') {
++                while (i < len && p[i] != '"' && p[i] != ',') i++;
++                if (o + 11 < sizeof(line) - 1) { memcpy(line + o, "?<redacted>", 11); o += 11; }
++                if (i < len && o < sizeof(line) - 1) line[o++] = p[i];
++                continue;
++            }
++            line[o++] = p[i];
++        }
++        line[o] = '\0';
++        logger_log(raop->logger, LOGGER_ERR, "AIRCAP HLS %s %s %d: %s", kind, url, n, line);
++        n++;
++        p = eol ? eol + 1 : NULL;
++    }
++}
++#endif
++
++
+ static void
+ http_handler_hls(raop_conn_t *conn,  http_request_t *request, http_response_t *response,
+                  char **response_data, int *response_datalen) {
+@@ -999,6 +1027,9 @@ http_handler_hls(raop_conn_t *conn,  http_request_t *request, http_response_t *r
+             free(master_playlist);
+             *response_data = data;
+             *response_datalen = (int ) len;
++#ifndef NDEBUG
++            aircap_log_playlist(raop, "master", url, data);
++#endif
+         } else {
+             logger_log(raop->logger, LOGGER_ERR,"requested master playlist %s not found", url); 
+         }
+@@ -1014,6 +1045,9 @@ http_handler_hls(raop_conn_t *conn,  http_request_t *request, http_response_t *r
+             free(media_playlist);
+             *response_data = data;
+             *response_datalen = strlen(data);
++#ifndef NDEBUG
++            aircap_log_playlist(raop, "media", url, data);
++#endif
+             logger_log(raop->logger, LOGGER_INFO,
+                        "Requested media_playlist %s has %5d chunks, total duration %9.3f secs", url, chunks, duration); 
+         } else {

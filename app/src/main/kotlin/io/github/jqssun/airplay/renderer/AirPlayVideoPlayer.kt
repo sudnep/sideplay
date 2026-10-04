@@ -11,6 +11,7 @@ import androidx.media3.common.MediaMetadata
 import androidx.media3.common.PlaybackParameters
 import androidx.media3.common.Player
 import androidx.media3.common.Timeline
+import androidx.media3.common.Tracks
 import androidx.media3.common.VideoSize
 import androidx.media3.exoplayer.ExoPlayer
 import io.github.jqssun.airplay.BuildConfig
@@ -54,6 +55,16 @@ class AirPlayVideoPlayer(private val context: Context) {
                 Log.w(TAG, "AIRCAP PLAYER_ERROR code=${error.errorCodeName} msg=${error.message} cause=${error.cause}")
             }
             onEnded?.invoke()
+        }
+        override fun onTracksChanged(tracks: Tracks) {
+            if (!BuildConfig.DEBUG) return
+            tracks.groups.forEach { g ->
+                for (i in 0 until g.length) {
+                    val f = g.getTrackFormat(i)
+                    Log.w(TAG, "AIRCAP TRACK type=${g.type} selected=${g.isTrackSelected(i)} container=${f.containerMimeType} " +
+                        "sample=${f.sampleMimeType} codecs=${f.codecs} ${f.width}x${f.height}")
+                }
+            }
         }
         override fun onPlaybackStateChanged(state: Int) {
             if (state == Player.STATE_ENDED) onEnded?.invoke()

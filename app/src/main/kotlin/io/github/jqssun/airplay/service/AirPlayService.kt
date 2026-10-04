@@ -729,6 +729,7 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
             mediaSession?.isActive = false
             _refreshDacpPlayer()
             _updateMediaNotification()
+            cancelOpenPrompt()
         }
         log("Client disconnected (${_connectionCount.value})")
     }
@@ -1038,16 +1039,58 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
         return builder.build()
     }
 
+    @Volatile var uiVisible: Boolean = false
+        set(value) {
+            field = value
+            if (value) cancelOpenPrompt()
+        }
+
     private fun launchMainActivity() {
         Handler(Looper.getMainLooper()).post {
-            val launchIntent = Intent(this, MainActivity::class.java)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
-            try {
-                startActivity(launchIntent)
-            } catch (e: Exception) {
-                Log.w(TAG, "Failed to launch activity", e)
+            when (decideConnectLaunch(uiVisible, android.provider.Settings.canDrawOverlays(this))) {
+                ConnectLaunch.NONE -> Unit
+                ConnectLaunch.LAUNCH -> {
+                    val launchIntent = Intent(this, MainActivity::class.java)
+                        .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT)
+                    try {
+                        startActivity(launchIntent)
+                    } catch (e: Exception) {
+                        Log.w(TAG, "Failed to launch activity", e)
+                    }
+                }
+                ConnectLaunch.PROMPT -> showOpenPrompt()
             }
         }
+    }
+
+    // a tap on a notification is a system-sent PendingIntent, which background-start rules allow
+    private fun showOpenPrompt() {
+        android.widget.Toast.makeText(this, getString(R.string.tv_prompt_text), android.widget.Toast.LENGTH_LONG).show()
+        val nm = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            nm.createNotificationChannel(
+                NotificationChannel(PROMPT_CHANNEL_ID, getString(R.string.tv_prompt_channel), NotificationManager.IMPORTANCE_HIGH)
+            )
+        }
+        val open = PendingIntent.getActivity(
+            this, 0,
+            Intent(this, MainActivity::class.java).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_REORDER_TO_FRONT),
+            PendingIntent.FLAG_IMMUTABLE or PendingIntent.FLAG_UPDATE_CURRENT,
+        )
+        val n = NotificationCompat.Builder(this, PROMPT_CHANNEL_ID)
+            .setSmallIcon(R.mipmap.ic_launcher)
+            .setContentTitle(getString(R.string.tv_prompt_title))
+            .setContentText(getString(R.string.tv_prompt_text))
+            .setPriority(NotificationCompat.PRIORITY_HIGH)
+            .setCategory(NotificationCompat.CATEGORY_CALL)
+            .setContentIntent(open)
+            .setAutoCancel(true)
+            .build()
+        nm.notify(PROMPT_NOTIFICATION_ID, n)
+    }
+
+    private fun cancelOpenPrompt() {
+        (getSystemService(NOTIFICATION_SERVICE) as NotificationManager).cancel(PROMPT_NOTIFICATION_ID)
     }
 
     private fun _mediaAction(action: String): PendingIntent {
@@ -1079,6 +1122,8 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
         private const val VOL_SYNC_TIMEOUT_MS = 800L
         private const val CHANNEL_ID = "airplay_service"
         private const val NOTIFICATION_ID = 1
+        private const val PROMPT_CHANNEL_ID = "connect_prompt"
+        private const val PROMPT_NOTIFICATION_ID = 2
         const val ACTION_PLAY_PAUSE = "io.github.jqssun.airplay.PLAY_PAUSE"
         const val ACTION_NEXT = "io.github.jqssun.airplay.NEXT"
         const val ACTION_PREV = "io.github.jqssun.airplay.PREV"

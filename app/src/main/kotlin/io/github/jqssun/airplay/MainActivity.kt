@@ -44,6 +44,7 @@ class MainActivity : ComponentActivity() {
         override fun onServiceConnected(name: ComponentName?, binder: IBinder?) {
             val svc = (binder as? AirPlayService.LocalBinder)?.service ?: return
             service = svc
+            svc.uiVisible = lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)
             svc.logCallback = logCallback
             svc.pinCallback = pinCallback
             viewModel.bindService(svc)
@@ -147,8 +148,14 @@ class MainActivity : ComponentActivity() {
         isInPip.value = inPip
     }
 
+    override fun onStart() {
+        super.onStart()
+        service?.uiVisible = true
+    }
+
     override fun onStop() {
         super.onStop()
+        service?.uiVisible = false
         // never stop mid-session
         if (!viewModel.runInBackground.value && !isChangingConfigurations &&
             viewModel.serverState.value == AirPlayService.ServerState.RUNNING &&

@@ -179,12 +179,12 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
 
     var logCallback: ((String) -> Unit)? = null
 
-    @Volatile private var _lastPin: String? = null
+    private val pinRelay = PinRelay { pin -> pinCallback?.invoke(pin) }
     var pinCallback: ((String?) -> Unit)? = null
         set(value) {
             field = value
             // ui replay only: binding the activity must not mint a new native pin
-            value?.invoke(_lastPin)
+            value?.invoke(pinRelay.current)
         }
 
     private fun log(msg: String) {
@@ -608,6 +608,8 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
     }
 
     override fun onVideoPlay(location: String, startPositionSeconds: Float) {
+        // hls casting never hits onAudioFormat/onVideoSize, so pairing would leave the pin up
+        clearPin()
         _videoLocation.value = location
         _videoPlaySeq.value++
         _videoPollSuppressed = false
@@ -759,9 +761,8 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
 
     override fun onDisplayPin(pin: String) {
         // a new pin is the sync point with the client prompt: show every new value immediately
-        if (_lastPin == pin) return
-        _lastPin = pin
-        pinCallback?.invoke(pin)
+        if (pinRelay.current == pin) return
+        pinRelay.display(pin)
         _updateMediaNotification()
     }
 
@@ -926,8 +927,12 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
     }
 
     private fun clearPin() {
-        _lastPin = null
-        pinCallback?.invoke(null)
+        pinRelay.clear()
+        _updateMediaNotification()
+    }
+
+    fun acknowledgePin() {
+        pinRelay.acknowledge()
         _updateMediaNotification()
     }
 
@@ -1058,10 +1063,10 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
                 builder.addAction(android.R.drawable.ic_media_next, "Next", _mediaAction(ACTION_NEXT))
             }
         } else {
-            if (_lastPin != null) {
+            if (pinRelay.current != null) {
                 // passive handoff only: do not launch/reorder the activity during pin auth
                 builder.setContentTitle(getString(R.string.notification_pin_title))
-                    .setContentText(getString(R.string.notification_pin_text, _lastPin))
+                    .setContentText(getString(R.string.notification_pin_text, pinRelay.current))
             } else {
                 builder.setContentTitle(getString(R.string.notification_title))
                     .setContentText(getString(R.string.notification_text))

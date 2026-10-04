@@ -577,6 +577,7 @@ class MainViewModel @Inject constructor(app: Application) : AndroidViewModel(app
 
     fun dismissPin() {
         _pinCode.value = null
+        service?.acknowledgePin()
     }
 
     fun showPin(pin: String?) {

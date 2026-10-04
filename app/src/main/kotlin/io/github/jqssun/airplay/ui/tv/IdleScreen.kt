@@ -1,5 +1,6 @@
 package io.github.jqssun.airplay.ui.tv
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -36,6 +37,8 @@ fun TvIdleScreen(
     overlayAccess: OverlayAccess,
     onOpenSettings: () -> Unit,
     onAllowAutoOpen: () -> Unit,
+    receiverError: Boolean = false,
+    onRetry: () -> Unit = {},
 ) {
     val settingsFocus = remember { FocusRequester() }
     LaunchedEffect(Unit) { settingsFocus.requestFocusUntilLanded() }
@@ -45,7 +48,11 @@ fun TvIdleScreen(
             verticalArrangement = Arrangement.spacedBy(20.dp),
         ) {
             Text(
-                text = stringResource(if (connecting) R.string.tv_idle_connecting else R.string.tv_idle_ready, serverName),
+                text = when {
+                    receiverError -> stringResource(R.string.tv_idle_error)
+                    connecting -> stringResource(R.string.tv_idle_connecting, serverName)
+                    else -> stringResource(R.string.tv_idle_ready, serverName)
+                },
                 style = MaterialTheme.typography.displaySmall,
                 color = Color.White,
                 modifier = Modifier.testTag("idle_title"),
@@ -54,6 +61,11 @@ fun TvIdleScreen(
             Step(1, stringResource(R.string.tv_idle_step_1))
             Step(2, stringResource(R.string.tv_idle_step_2))
             Step(3, stringResource(R.string.tv_idle_step_3, serverName))
+            if (receiverError) {
+                Button(onClick = onRetry, modifier = Modifier.tvFocus().testTag("retry_receiver")) {
+                    Text(stringResource(R.string.tv_retry))
+                }
+            }
             when (overlayAccess) {
                 OverlayAccess.GRANTABLE -> Button(
                     onClick = onAllowAutoOpen,
@@ -94,7 +106,8 @@ private fun Step(n: Int, text: String) {
 }
 
 @Composable
-fun TvPinScreen(code: String) {
+fun TvPinScreen(code: String, onDismiss: () -> Unit) {
+    BackHandler { onDismiss() }
     Box(Modifier.fillMaxSize().background(TvBackground), contentAlignment = Alignment.Center) {
         Column(horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.spacedBy(24.dp)) {
             Text(stringResource(R.string.tv_pin_title), style = MaterialTheme.typography.headlineMedium, color = TvMuted)

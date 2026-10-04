@@ -113,6 +113,7 @@ class MainActivity : ComponentActivity() {
                 if (tv) {
                     TvApp(
                         viewModel = viewModel,
+                        isInPip = isInPip.value,
                         onSurfaceAvailable = { viewModel.onSurfaceAvailable(it) },
                         onSurfaceDestroyed = { viewModel.onSurfaceDestroyed(it) },
                     )

@@ -35,6 +35,10 @@ class TvScreenTest {
     @Test fun videoWinsOverMirroring() =
         assertEquals(TvScreen.Video, resolveTvScreen(idle.copy(connectionCount = 1, mirroringActive = true, videoPlaybackActive = true)))
 
+    // a cancelled pairing drops the connection but the service keeps the code; never strand the tv on it
+    @Test fun pinWithoutConnectionIsIdle() =
+        assertEquals(TvScreen.Idle(connecting = false), resolveTvScreen(idle.copy(pinCode = "1234")))
+
     @Test fun pinWinsOverEverything() =
         assertEquals(TvScreen.Pin("1234"), resolveTvScreen(idle.copy(connectionCount = 1, videoPlaybackActive = true, pinCode = "1234")))
 }

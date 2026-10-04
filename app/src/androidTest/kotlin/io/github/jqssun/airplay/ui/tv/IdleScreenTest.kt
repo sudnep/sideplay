@@ -6,6 +6,7 @@ import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
@@ -14,8 +15,21 @@ class IdleScreenTest {
     @get:Rule val rule = createComposeRule()
 
     private fun show(access: OverlayAccess = OverlayAccess.GRANTED, connecting: Boolean = false, ip: String? = "192.168.1.248",
-                     onSettings: () -> Unit = {}, onAllow: () -> Unit = {}) = rule.setContent {
-        TvIdleScreen("Living Room TV", ip, connecting, access, onSettings, onAllow)
+                     onSettings: () -> Unit = {}, onAllow: () -> Unit = {}, error: Boolean = false, onRetry: () -> Unit = {}) = rule.setContent {
+        TvIdleScreen("Living Room TV", ip, connecting, access, onSettings, onAllow, receiverError = error, onRetry = onRetry)
+    }
+
+    @Test fun receiverErrorShowsRetryInsteadOfReady() {
+        var retries = 0
+        show(error = true, onRetry = { retries++ })
+        rule.onNodeWithTag("idle_title").assertTextContains("isn't running", substring = true)
+        rule.onNodeWithTag("retry_receiver").assertIsDisplayed().performClick()
+        assertEquals(1, retries)
+    }
+
+    @Test fun noRetryWhenRunning() {
+        show()
+        rule.onNodeWithTag("retry_receiver").assertDoesNotExist()
     }
 
     @Test fun showsNameAndAddress() {
@@ -59,7 +73,7 @@ class IdleScreenTest {
     }
 
     @Test fun pinScreenShowsCode() {
-        rule.setContent { TvPinScreen("4821") }
+        rule.setContent { TvPinScreen("4821", onDismiss = {}) }
         rule.onNodeWithTag("pin_code").assertTextContains("4821")
     }
 }

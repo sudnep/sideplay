@@ -9,16 +9,22 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.produceState
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.LifecycleResumeEffect
+import io.github.jqssun.airplay.renderer.DecoderSelector
+import io.github.jqssun.airplay.service.AirPlayService.ServerState
 import io.github.jqssun.airplay.ui.VideoSurfaceView
 import io.github.jqssun.airplay.ui.theme.AirPlayTheme
 import io.github.jqssun.airplay.viewmodel.MainViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 enum class TvRoute { HOME, SETTINGS, TROUBLESHOOTING }
 
@@ -31,7 +37,9 @@ fun TvTheme(content: @Composable () -> Unit) = AirPlayTheme(darkTheme = true, co
 fun TvAppContent(
     screen: TvScreen,
     route: TvRoute,
+    inPip: Boolean,
     mirrorSurface: @Composable () -> Unit,
+    playbackSurface: @Composable () -> Unit,
     firstRun: @Composable () -> Unit,
     idle: @Composable (connecting: Boolean) -> Unit,
     pin: @Composable (code: String) -> Unit,
@@ -41,7 +49,13 @@ fun TvAppContent(
     settings: @Composable () -> Unit,
     troubleshooting: @Composable () -> Unit,
 ) {
-    Box(Modifier.fillMaxSize().background(Color.Black)) {
+    // centred: portrait iphones and 4:3 ipads give a surface narrower than the tv
+    Box(Modifier.fillMaxSize().background(Color.Black), contentAlignment = Alignment.Center) {
+        // picture-in-picture is a small window: show only the picture
+        if (inPip) {
+            if (screen is TvScreen.Video) playbackSurface() else mirrorSurface()
+            return@Box
+        }
         // kept composed (never moved) so frames have a surface the moment mirroring starts
         if (screen !is TvScreen.Video) mirrorSurface()
         when (screen) {
@@ -62,6 +76,7 @@ fun TvAppContent(
 @Composable
 fun TvApp(
     viewModel: MainViewModel,
+    isInPip: Boolean,
     onSurfaceAvailable: (Surface) -> Unit,
     onSurfaceDestroyed: (Surface) -> Unit,
 ) {
@@ -75,6 +90,8 @@ fun TvApp(
     val pinCode by viewModel.pinCode.collectAsState()
     val serverName by viewModel.serverName.collectAsState()
     val lanAddress by viewModel.lanAddress.collectAsState()
+    val serverState by viewModel.serverState.collectAsState()
+    val h265 by viewModel.h265Enabled.collectAsState()
 
     var route by rememberSaveable { mutableStateOf(TvRoute.HOME) }
     var overlayAccess by remember { mutableStateOf(OverlayPermission.access(context)) }
@@ -87,11 +104,24 @@ fun TvApp(
     val screen = resolveTvScreen(TvSession(firstRunDone, connections, mirroring, audioOnly, videoActive, videoPending, pinCode))
     // a session ends any settings visit, so the next idle starts at home
     LaunchedEffect(screen !is TvScreen.Idle) { if (screen !is TvScreen.Idle) route = TvRoute.HOME }
+    // the service only clears a pin when a stream starts; a cancelled pairing must not leave it behind
+    LaunchedEffect(connections) { if (connections == 0) viewModel.dismissPin() }
+
+    val playbackSurface: @Composable () -> Unit = {
+        val aspect by viewModel.videoPlaybackAspect.collectAsState()
+        VideoSurfaceView(
+            onSurfaceAvailable = { viewModel.onVideoPlaybackSurfaceAvailable(it) },
+            onSurfaceDestroyed = { viewModel.onVideoPlaybackSurfaceDestroyed(it) },
+            aspectRatio = aspect,
+        )
+    }
 
     TvTheme {
         TvAppContent(
             screen = screen,
             route = route,
+            inPip = isInPip,
+            playbackSurface = playbackSurface,
             mirrorSurface = {
                 val aspect by viewModel.videoAspect.collectAsState()
                 VideoSurfaceView(onSurfaceAvailable = onSurfaceAvailable, onSurfaceDestroyed = onSurfaceDestroyed, aspectRatio = aspect)
@@ -105,9 +135,11 @@ fun TvApp(
                     overlayAccess = overlayAccess,
                     onOpenSettings = { route = TvRoute.SETTINGS },
                     onAllowAutoOpen = { runCatching { context.startActivity(OverlayPermission.intent(context)) } },
+                    receiverError = serverState == ServerState.ERROR,
+                    onRetry = { viewModel.startServer() },
                 )
             },
-            pin = { code -> TvPinScreen(code) },
+            pin = { code -> TvPinScreen(code, onDismiss = { viewModel.dismissPin() }) },
             mirroring = { TvMirroringOverlay(onDisconnect = { viewModel.disconnectAll() }) },
             video = {
                 val title by viewModel.videoTitle.collectAsState()
@@ -115,16 +147,9 @@ fun TvApp(
                 val buffering by viewModel.videoBuffering.collectAsState()
                 val position by viewModel.videoPositionMs.collectAsState()
                 val duration by viewModel.videoDurationMs.collectAsState()
-                val aspect by viewModel.videoPlaybackAspect.collectAsState()
                 TvVideoScreen(
                     state = TvVideoState(title, playing, buffering, pending = !videoActive && videoPending, position, duration),
-                    surface = {
-                        VideoSurfaceView(
-                            onSurfaceAvailable = { viewModel.onVideoPlaybackSurfaceAvailable(it) },
-                            onSurfaceDestroyed = { viewModel.onVideoPlaybackSurfaceDestroyed(it) },
-                            aspectRatio = aspect,
-                        )
-                    },
+                    surface = playbackSurface,
                     onTogglePlay = { viewModel.toggleVideoPlayPause(showOverlay = false) },
                     onPlay = { viewModel.setVideoPlaying(true, showOverlay = false) },
                     onPause = { viewModel.setVideoPlaying(false, showOverlay = false) },
@@ -139,7 +164,6 @@ fun TvApp(
             settings = {
                 val requirePin by viewModel.requirePin.collectAsState()
                 val boot by viewModel.bootAutoStart.collectAsState()
-                val h265 by viewModel.h265Enabled.collectAsState()
                 TvSettingsScreen(
                     state = TvSettingsState(serverName, requirePin, boot, h265),
                     onRename = { viewModel.setServerName(it) },
@@ -152,13 +176,20 @@ fun TvApp(
             },
             troubleshooting = {
                 val port by viewModel.serverPort.collectAsState()
-                val debug by viewModel.debugInfo.collectAsState()
+                // the service's debug stream is off by default; ask the decoder selector directly
+                val decoders by produceState("", h265) {
+                    value = withContext(Dispatchers.IO) {
+                        val selector = DecoderSelector(context)
+                        val avc = selector.avc()
+                        decoderSummary(avc?.name, selector.hevc(avc, 1920, 1080, 60)?.name, h265)
+                    }
+                }
                 val logs by viewModel.logs.collectAsState()
                 val version = remember {
                     runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull().orEmpty()
                 }
                 TvTroubleshootingScreen(
-                    state = TvTroubleshootingState(lanAddress, port, version, debug.videoCodec, logs),
+                    state = TvTroubleshootingState(lanAddress, port, version, decoders, logs),
                     onBack = { route = TvRoute.SETTINGS },
                 )
             },

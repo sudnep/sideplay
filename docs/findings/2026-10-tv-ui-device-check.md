@@ -10,7 +10,7 @@ Driven over ADB (`input keyevent`, `screencap`, `uiautomator dump`); no iPhone i
 | Idle after Done (name, steps, IP, focus) | Pass: "Living Room TV is ready", 3 steps, "TV address: 192.168.1.248", Settings focused | screens/tv-idle.png |
 | Prefs written | Pass: `first_run_done=true`, `boot_auto_start=true` | — |
 | Settings reachable, rows by D-pad | Pass, after fix 8d130f8 (last row was squashed before) | screens/tv-settings.png, screens/tv-settings-bottom.png |
-| Troubleshooting content | Pass: address + port 7000, decoder "No video playing", About, licence, credits, Apple disclaimer; D-pad scrolls to "Recent log" | screens/tv-troubleshooting.png, screens/tv-troubleshooting-scrolled.png |
+| Troubleshooting content | Pass: address + port 7000, decoders "H.264: OMX.MTK.VIDEO.DECODER.AVC · H.265: OMX.MTK.VIDEO.DECODER.HEVC" (after review fix; was always "No video playing"), About, licence, credits, Apple disclaimer; D-pad scrolls to "Recent log" | screens/tv-troubleshooting.png, screens/tv-troubleshooting-scrolled.png |
 | Back returns to Idle | Pass: Troubleshooting → Settings → Idle | screens/tv-idle-after-back.png |
 | Still advertised as "Living Room TV" | Pass (`dns-sd -B _airplay._tcp`) | — |
 | Overlay UI before grant | Shows "Keep Sideplay open to receive the picture" (`OverlayAccess.UNAVAILABLE`) | screens/tv-idle.png |

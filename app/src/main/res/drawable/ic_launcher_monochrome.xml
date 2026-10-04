@@ -1,15 +1,30 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="108dp"
     android:height="108dp"
-    android:viewportWidth="960"
-    android:viewportHeight="960">
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- scaled into the 66dp adaptive safe zone so circular masks don't clip the phone -->
     <group
-        android:pivotX="480"
-        android:pivotY="480"
-        android:scaleX="0.5"
-        android:scaleY="0.5">
+        android:pivotX="54"
+        android:pivotY="54"
+        android:scaleX="0.8"
+        android:scaleY="0.8">
+        <group
+            android:pivotX="36"
+            android:pivotY="54"
+            android:rotation="-12">
+            <path
+                android:fillColor="#FFFFFF"
+                android:pathData="M29,28 H43 A7,7 0 0 1 50,35 V73 A7,7 0 0 1 43,80 H29 A7,7 0 0 1 22,73 V35 A7,7 0 0 1 29,28 Z" />
+            <path
+                android:fillColor="#00000000"
+                android:pathData="M33,32 H39 A2,2 0 0 1 41,34 A2,2 0 0 1 39,36 H33 A2,2 0 0 1 31,34 A2,2 0 0 1 33,32 Z" />
+        </group>
         <path
-            android:fillColor="#000000"
-            android:pathData="m240,840 l240,-240 l240,240L240,840ZM80,680v-480q0,-33 23.5,-56.5T160,120h640q33,0 56.5,23.5T880,200v480q0,33 -23.5,56.5T800,760H680v-80h120v-480H160v480h120v80H160q-33,0 -56.5,-23.5T80,680Zm400,-200Z" />
+            android:fillColor="#FFFFFF"
+            android:strokeColor="#FFFFFF"
+            android:strokeWidth="5"
+            android:strokeLineJoin="round"
+            android:pathData="M61,37 L85,54 L61,71 Z" />
     </group>
 </vector>

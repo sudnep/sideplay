@@ -84,4 +84,13 @@ class IdleScreenTest {
         assertTrue(opened)
         rule.onNodeWithTag("overlay_steps").assertTextContains("Special app access", substring = true)
     }
+
+    // ios keeps an idle control connection open for minutes after a session ends
+    @Test fun connectingLabelRevertsToReadyAfterAWhile() {
+        rule.mainClock.autoAdvance = false
+        show(connecting = true)
+        rule.onNodeWithTag("idle_title").assertTextContains("Connecting to Living Room TV", substring = true)
+        rule.mainClock.advanceTimeBy(CONNECTING_LABEL_MS + 1_000)
+        rule.onNodeWithTag("idle_title").assertTextContains("Living Room TV is ready")
+    }
 }

@@ -793,6 +793,9 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
 
     override fun onAudioTeardown() {
         _setPlaying(false)
+        // the sender ended the audio stream but ios keeps its control connection open for minutes;
+        // leave audio mode so the tv returns to idle instead of showing a stale now-playing screen
+        if (!_mirroringActive.value) _setAudioOnly(false)
     }
 
     override fun onDacpId(dacpId: String, activeRemote: String) {

@@ -15,6 +15,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
@@ -29,6 +32,8 @@ import kotlinx.coroutines.delay
 
 val TvBackground = Color(0xFF101418)
 const val PIN_TIMEOUT_MS = 120_000L
+// ios keeps an idle control connection open after a session ends; don't claim "connecting" forever
+const val CONNECTING_LABEL_MS = 10_000L
 private val TvMuted = Color.White.copy(alpha = 0.7f)
 
 @Composable
@@ -44,6 +49,13 @@ fun TvIdleScreen(
 ) {
     val settingsFocus = remember { FocusRequester() }
     LaunchedEffect(Unit) { settingsFocus.requestFocusUntilLanded() }
+    var showConnecting by remember(connecting) { mutableStateOf(connecting) }
+    LaunchedEffect(connecting) {
+        if (connecting) {
+            delay(CONNECTING_LABEL_MS)
+            showConnecting = false
+        }
+    }
     Box(Modifier.fillMaxSize().background(TvBackground).padding(horizontal = 64.dp, vertical = 48.dp)) {
         Column(
             modifier = Modifier.align(Alignment.CenterStart).fillMaxWidth(0.7f),
@@ -52,7 +64,7 @@ fun TvIdleScreen(
             Text(
                 text = when {
                     receiverError -> stringResource(R.string.tv_idle_error)
-                    connecting -> stringResource(R.string.tv_idle_connecting, serverName)
+                    showConnecting -> stringResource(R.string.tv_idle_connecting, serverName)
                     else -> stringResource(R.string.tv_idle_ready, serverName)
                 },
                 style = MaterialTheme.typography.displaySmall,

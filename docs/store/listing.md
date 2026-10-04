@@ -36,3 +36,7 @@ Sources for the generated graphics are in `src/` (render with headless Chrome at
 ## Data safety answers
 
 No data is collected or shared. All traffic stays on the local network between the phone and the TV.
+
+## Privacy policy
+
+https://github.com/sudnep/sideplay/blob/main/docs/privacy-policy.md

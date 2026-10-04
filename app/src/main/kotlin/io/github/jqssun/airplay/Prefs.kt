@@ -46,4 +46,5 @@ object Prefs {
     const val ADVERTISE_VIDEO = "advertise_video"; const val DEF_ADVERTISE_VIDEO = true
     const val ADVERTISE_AUDIO = "advertise_audio"; const val DEF_ADVERTISE_AUDIO = true
     const val LAUNCH_ON_CONNECT = "launch_on_connect"; const val DEF_LAUNCH_ON_CONNECT = true
+    const val FIRST_RUN_DONE = "first_run_done"; const val DEF_FIRST_RUN_DONE = false
 }

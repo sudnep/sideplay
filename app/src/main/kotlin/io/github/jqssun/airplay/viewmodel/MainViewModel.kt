@@ -16,7 +16,10 @@ import io.github.jqssun.airplay.audio.TrackInfo
 import io.github.jqssun.airplay.service.AirPlayService
 import io.github.jqssun.airplay.service.AirPlayService.ServerState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.github.jqssun.airplay.ui.tv.LanAddress
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -107,6 +110,38 @@ class MainViewModel @Inject constructor(app: Application) : AndroidViewModel(app
 
     private val _serverName = MutableStateFlow(prefs.getString(Prefs.SERVER_NAME, null) ?: ServerName.default(app))
     val serverName: StateFlow<String> = _serverName.asStateFlow()
+
+    private val _firstRunDone = MutableStateFlow(prefs.getBoolean(Prefs.FIRST_RUN_DONE, Prefs.DEF_FIRST_RUN_DONE))
+    val firstRunDone: StateFlow<Boolean> = _firstRunDone.asStateFlow()
+
+    private val _lanAddress = MutableStateFlow<String?>(null)
+    val lanAddress: StateFlow<String?> = _lanAddress.asStateFlow()
+
+    init {
+        // interface enumeration is too heavy for the 200 ms service poll
+        viewModelScope.launch(Dispatchers.IO) {
+            while (isActive) {
+                _lanAddress.value = LanAddress.current()
+                delay(LAN_ADDRESS_REFRESH_MS)
+            }
+        }
+    }
+
+    fun completeFirstRun(name: String, startAtBoot: Boolean) {
+        setBootAutoStart(startAtBoot)
+        if (name != _serverName.value) setServerName(name)
+        _firstRunDone.value = true
+        prefs.edit().putBoolean(Prefs.FIRST_RUN_DONE, true).apply()
+    }
+
+    // uxplay has no per-client disconnect; a restart drops every connection
+    fun disconnectAll() {
+        val svc = service ?: return
+        if (svc.serverState.value == ServerState.RUNNING) {
+            svc.stopServer()
+            svc.startServer(_serverName.value)
+        }
+    }
 
     // settings
     private val _serverPort = MutableStateFlow(prefs.getInt(Prefs.SERVER_PORT, Prefs.DEF_SERVER_PORT))
@@ -603,6 +638,7 @@ class MainViewModel @Inject constructor(app: Application) : AndroidViewModel(app
     }
 
     private companion object {
+        const val LAN_ADDRESS_REFRESH_MS = 10_000L
         // post-commit: show the target until within epsilon, give up after the timeout
         const val SCRUB_SETTLE_POLL_MS = 100L
         const val SCRUB_SETTLE_EPSILON_MS = 2_000L

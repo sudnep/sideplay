@@ -25,4 +25,13 @@ class StartPolicyTest {
     // so the policy only needs to avoid starting on non-start intents
     @Test fun explicitStopIsNotRestarted() =
         assertEquals(false, StartPolicy.decide("other", start, runInBackground = true).startServer)
+
+    // android 12+ throws ForegroundServiceStartNotAllowedException (an IllegalStateException) from the background
+    @Test fun promotionRefusedByAndroidIsReported() =
+        assertEquals(false, StartPolicy.promoteSafely { throw IllegalStateException("not allowed") })
+
+    @Test fun promotionSucceeds() = assertEquals(true, StartPolicy.promoteSafely { })
+
+    @Test(expected = IllegalArgumentException::class)
+    fun unrelatedErrorsStillSurface() { StartPolicy.promoteSafely { throw IllegalArgumentException("bug") } }
 }

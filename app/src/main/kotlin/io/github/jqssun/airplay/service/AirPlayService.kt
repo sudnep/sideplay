@@ -330,7 +330,11 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
             runInBackground = prefs.getBoolean(Prefs.RUN_IN_BACKGROUND, Prefs.DEF_RUN_IN_BACKGROUND),
         )
         if (decision.startServer) {
-            promoteToForeground()
+            if (!StartPolicy.promoteSafely { promoteToForeground() }) {
+                log("Foreground start not allowed; receiver stays off until opened")
+                stopSelf(startId)
+                return START_NOT_STICKY
+            }
             val name = prefs.getString(Prefs.SERVER_NAME, null) ?: ServerName.default(this)
             startServer(name, ensureServiceStarted = false)
             if (_serverState.value != ServerState.RUNNING) stopSelf(startId)

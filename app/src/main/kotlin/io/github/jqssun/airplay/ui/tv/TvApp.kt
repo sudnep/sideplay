@@ -17,9 +17,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.LifecycleResumeEffect
 import io.github.jqssun.airplay.ui.VideoSurfaceView
+import io.github.jqssun.airplay.ui.theme.AirPlayTheme
 import io.github.jqssun.airplay.viewmodel.MainViewModel
 
 enum class TvRoute { HOME, SETTINGS, TROUBLESHOOTING }
+
+// tv screens always draw on a dark background, whatever the system theme
+@Composable
+fun TvTheme(content: @Composable () -> Unit) = AirPlayTheme(darkTheme = true, content = content)
 
 /** Routing only; every screen is a slot so this can be tested without the service. */
 @Composable
@@ -83,78 +88,80 @@ fun TvApp(
     // a session ends any settings visit, so the next idle starts at home
     LaunchedEffect(screen !is TvScreen.Idle) { if (screen !is TvScreen.Idle) route = TvRoute.HOME }
 
-    TvAppContent(
-        screen = screen,
-        route = route,
-        mirrorSurface = {
-            val aspect by viewModel.videoAspect.collectAsState()
-            VideoSurfaceView(onSurfaceAvailable = onSurfaceAvailable, onSurfaceDestroyed = onSurfaceDestroyed, aspectRatio = aspect)
-        },
-        firstRun = { TvFirstRunScreen(serverName) { name, boot -> viewModel.completeFirstRun(name, boot) } },
-        idle = { connecting ->
-            TvIdleScreen(
-                serverName = serverName,
-                ipAddress = lanAddress,
-                connecting = connecting,
-                overlayAccess = overlayAccess,
-                onOpenSettings = { route = TvRoute.SETTINGS },
-                onAllowAutoOpen = { runCatching { context.startActivity(OverlayPermission.intent(context)) } },
-            )
-        },
-        pin = { code -> TvPinScreen(code) },
-        mirroring = { TvMirroringOverlay(onDisconnect = { viewModel.disconnectAll() }) },
-        video = {
-            val title by viewModel.videoTitle.collectAsState()
-            val playing by viewModel.videoPlaying.collectAsState()
-            val buffering by viewModel.videoBuffering.collectAsState()
-            val position by viewModel.videoPositionMs.collectAsState()
-            val duration by viewModel.videoDurationMs.collectAsState()
-            val aspect by viewModel.videoPlaybackAspect.collectAsState()
-            TvVideoScreen(
-                state = TvVideoState(title, playing, buffering, pending = !videoActive && videoPending, position, duration),
-                surface = {
-                    VideoSurfaceView(
-                        onSurfaceAvailable = { viewModel.onVideoPlaybackSurfaceAvailable(it) },
-                        onSurfaceDestroyed = { viewModel.onVideoPlaybackSurfaceDestroyed(it) },
-                        aspectRatio = aspect,
-                    )
-                },
-                onTogglePlay = { viewModel.toggleVideoPlayPause(showOverlay = false) },
-                onPlay = { viewModel.setVideoPlaying(true, showOverlay = false) },
-                onPause = { viewModel.setVideoPlaying(false, showOverlay = false) },
-                onSeekBy = { viewModel.seekVideoBy(it) },
-                onStop = { viewModel.stopVideoPlayback() },
-            )
-        },
-        audio = {
-            val track by viewModel.trackInfo.collectAsState()
-            TvAudioScreen(track.title, track.artist, track.album, track.coverArt)
-        },
-        settings = {
-            val requirePin by viewModel.requirePin.collectAsState()
-            val boot by viewModel.bootAutoStart.collectAsState()
-            val h265 by viewModel.h265Enabled.collectAsState()
-            TvSettingsScreen(
-                state = TvSettingsState(serverName, requirePin, boot, h265),
-                onRename = { viewModel.setServerName(it) },
-                onRequirePin = { viewModel.setRequirePin(it) },
-                onBootAutoStart = { viewModel.setBootAutoStart(it) },
-                onH265 = { viewModel.setH265Enabled(it) },
-                onOpenTroubleshooting = { route = TvRoute.TROUBLESHOOTING },
-                onBack = { route = TvRoute.HOME },
-            )
-        },
-        troubleshooting = {
-            val port by viewModel.serverPort.collectAsState()
-            val debug by viewModel.debugInfo.collectAsState()
-            val logs by viewModel.logs.collectAsState()
-            val version = remember {
-                runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull().orEmpty()
-            }
-            TvTroubleshootingScreen(
-                state = TvTroubleshootingState(lanAddress, port, version, debug.videoCodec, logs),
-                onBack = { route = TvRoute.SETTINGS },
-            )
-        },
-    )
+    TvTheme {
+        TvAppContent(
+            screen = screen,
+            route = route,
+            mirrorSurface = {
+                val aspect by viewModel.videoAspect.collectAsState()
+                VideoSurfaceView(onSurfaceAvailable = onSurfaceAvailable, onSurfaceDestroyed = onSurfaceDestroyed, aspectRatio = aspect)
+            },
+            firstRun = { TvFirstRunScreen(serverName) { name, boot -> viewModel.completeFirstRun(name, boot) } },
+            idle = { connecting ->
+                TvIdleScreen(
+                    serverName = serverName,
+                    ipAddress = lanAddress,
+                    connecting = connecting,
+                    overlayAccess = overlayAccess,
+                    onOpenSettings = { route = TvRoute.SETTINGS },
+                    onAllowAutoOpen = { runCatching { context.startActivity(OverlayPermission.intent(context)) } },
+                )
+            },
+            pin = { code -> TvPinScreen(code) },
+            mirroring = { TvMirroringOverlay(onDisconnect = { viewModel.disconnectAll() }) },
+            video = {
+                val title by viewModel.videoTitle.collectAsState()
+                val playing by viewModel.videoPlaying.collectAsState()
+                val buffering by viewModel.videoBuffering.collectAsState()
+                val position by viewModel.videoPositionMs.collectAsState()
+                val duration by viewModel.videoDurationMs.collectAsState()
+                val aspect by viewModel.videoPlaybackAspect.collectAsState()
+                TvVideoScreen(
+                    state = TvVideoState(title, playing, buffering, pending = !videoActive && videoPending, position, duration),
+                    surface = {
+                        VideoSurfaceView(
+                            onSurfaceAvailable = { viewModel.onVideoPlaybackSurfaceAvailable(it) },
+                            onSurfaceDestroyed = { viewModel.onVideoPlaybackSurfaceDestroyed(it) },
+                            aspectRatio = aspect,
+                        )
+                    },
+                    onTogglePlay = { viewModel.toggleVideoPlayPause(showOverlay = false) },
+                    onPlay = { viewModel.setVideoPlaying(true, showOverlay = false) },
+                    onPause = { viewModel.setVideoPlaying(false, showOverlay = false) },
+                    onSeekBy = { viewModel.seekVideoBy(it) },
+                    onStop = { viewModel.stopVideoPlayback() },
+                )
+            },
+            audio = {
+                val track by viewModel.trackInfo.collectAsState()
+                TvAudioScreen(track.title, track.artist, track.album, track.coverArt)
+            },
+            settings = {
+                val requirePin by viewModel.requirePin.collectAsState()
+                val boot by viewModel.bootAutoStart.collectAsState()
+                val h265 by viewModel.h265Enabled.collectAsState()
+                TvSettingsScreen(
+                    state = TvSettingsState(serverName, requirePin, boot, h265),
+                    onRename = { viewModel.setServerName(it) },
+                    onRequirePin = { viewModel.setRequirePin(it) },
+                    onBootAutoStart = { viewModel.setBootAutoStart(it) },
+                    onH265 = { viewModel.setH265Enabled(it) },
+                    onOpenTroubleshooting = { route = TvRoute.TROUBLESHOOTING },
+                    onBack = { route = TvRoute.HOME },
+                )
+            },
+            troubleshooting = {
+                val port by viewModel.serverPort.collectAsState()
+                val debug by viewModel.debugInfo.collectAsState()
+                val logs by viewModel.logs.collectAsState()
+                val version = remember {
+                    runCatching { context.packageManager.getPackageInfo(context.packageName, 0).versionName }.getOrNull().orEmpty()
+                }
+                TvTroubleshootingScreen(
+                    state = TvTroubleshootingState(lanAddress, port, version, debug.videoCodec, logs),
+                    onBack = { route = TvRoute.SETTINGS },
+                )
+            },
+        )
+    }
 }

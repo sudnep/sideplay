@@ -28,7 +28,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import io.github.jqssun.airplay.R
-import io.github.jqssun.airplay.ui.dpadFocus
 import io.github.jqssun.airplay.ui.requestFocusUntilLanded
 import kotlinx.coroutines.delay
 
@@ -63,13 +62,13 @@ fun TvMirroringOverlay(onDisconnect: () -> Unit) {
                 confirmButton = {
                     TextButton(
                         onClick = { confirm = false; onDisconnect() },
-                        modifier = Modifier.dpadFocus().testTag("confirm_disconnect"),
+                        modifier = Modifier.tvFocus().testTag("confirm_disconnect"),
                     ) { Text(stringResource(R.string.tv_disconnect)) }
                 },
                 dismissButton = {
                     TextButton(
                         onClick = { confirm = false },
-                        modifier = Modifier.focusRequester(cancelFocus).dpadFocus().testTag("cancel_disconnect"),
+                        modifier = Modifier.focusRequester(cancelFocus).tvFocus().testTag("cancel_disconnect"),
                     ) { Text(stringResource(R.string.tv_cancel)) }
                 },
             )

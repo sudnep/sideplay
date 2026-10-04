@@ -30,7 +30,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.jqssun.airplay.R
 import io.github.jqssun.airplay.ServerName
-import io.github.jqssun.airplay.ui.dpadFocus
 import io.github.jqssun.airplay.ui.requestFocusUntilLanded
 
 @Composable
@@ -52,7 +51,7 @@ fun TvFirstRunScreen(suggestedName: String, onDone: (name: String, startAtBoot: 
             modifier = Modifier.fillMaxWidth().testTag("firstrun_name"),
         )
         Row(
-            modifier = Modifier.fillMaxWidth().dpadFocus(RoundedCornerShape(12.dp)).clickable { boot = !boot }
+            modifier = Modifier.fillMaxWidth().tvFocus(RoundedCornerShape(12.dp)).clickable { boot = !boot }
                 .padding(horizontal = 16.dp, vertical = 12.dp).testTag("firstrun_boot"),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
@@ -63,7 +62,7 @@ fun TvFirstRunScreen(suggestedName: String, onDone: (name: String, startAtBoot: 
         Button(
             onClick = { onDone(ServerName.choose(name, null, null), boot) },
             enabled = name.isNotBlank(),
-            modifier = Modifier.focusRequester(doneFocus).dpadFocus().testTag("firstrun_done"),
+            modifier = Modifier.focusRequester(doneFocus).tvFocus().testTag("firstrun_done"),
         ) { Text(stringResource(R.string.tv_firstrun_done)) }
     }
 }

@@ -23,7 +23,6 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import io.github.jqssun.airplay.R
-import io.github.jqssun.airplay.ui.dpadFocus
 import io.github.jqssun.airplay.ui.requestFocusUntilLanded
 
 val TvBackground = Color(0xFF101418)
@@ -58,7 +57,7 @@ fun TvIdleScreen(
             when (overlayAccess) {
                 OverlayAccess.GRANTABLE -> Button(
                     onClick = onAllowAutoOpen,
-                    modifier = Modifier.dpadFocus().testTag("allow_auto_open"),
+                    modifier = Modifier.tvFocus().testTag("allow_auto_open"),
                 ) { Text(stringResource(R.string.tv_idle_allow_auto_open)) }
                 OverlayAccess.UNAVAILABLE -> Text(
                     stringResource(R.string.tv_idle_keep_open),
@@ -80,7 +79,7 @@ fun TvIdleScreen(
             }
             Button(
                 onClick = onOpenSettings,
-                modifier = Modifier.focusRequester(settingsFocus).dpadFocus().testTag("open_settings"),
+                modifier = Modifier.focusRequester(settingsFocus).tvFocus().testTag("open_settings"),
             ) { Text(stringResource(R.string.tv_settings)) }
         }
     }

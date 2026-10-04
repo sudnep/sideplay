@@ -153,7 +153,7 @@ In `AirPlayVideoPlayer`:
                 return
             }
 ```
-Use the player field name the class actually holds (`grep -n "private var .*ExoPlayer" renderer/AirPlayVideoPlayer.kt`); if it differs from `_player`, use that name and record it in the ledger.
+The class's player field is `player` (`private var player: ExoPlayer?`); use that name wherever this step says `_player`.
 
 Run: `./gw :app:testDebugUnitTest :app:assembleDebug`. Expected: `BUILD SUCCESSFUL`.
 
@@ -306,6 +306,7 @@ Install the Task 1–3 build while the user is **not** casting, relaunch Sidepla
 - [ ] **Step 1: Drive portrait.** The user AirPlays the same Google Drive video. Expected: picture and sound; `AIRCAP TRACK` selected tracks ≤ 4096×2304; no `Decoder failed`. Also a YouTube **Short** (portrait).
 - [ ] **Step 2: Stable PIN.** Turn PIN on, pair from the iPhone and note the code. Then restart the receiver (Settings → toggle H.265 twice, which restarts the server), and reconnect from the iPhone. Expected: the same code shown, and the iPhone connects (no `client proof not validated`). Turn PIN off afterwards.
 - [ ] **Step 3: Safari app.** Screen Mirroring off; the user plays the test MP4 in the **Safari app** → AirPlay icon → Living Room TV (AirPlay). Save every `AIRCAP RTSP`/`AIRCAP REQ` line from connect to disconnect to `captures/safari-app-rtsp.txt` (redacted). Also capture `dns-sd -L` TXT for Sideplay and AirReceiver side by side.
+- [ ] **Step 3b: YouTube lock comparison.** The user AirPlays a YouTube video to **AFTKA-209 (Fire TV AirReceiver)**, locks the phone for 60 s, and records whether it keeps playing, then repeats on Living Room TV (AirPlay). If AirReceiver keeps playing while Sideplay stops, capture both and add the cause to the findings. In particular check whether Sideplay's HLS refresh (UxPlay patch 0003, "refresh live media playlists on demand") ends playback when the phone stops answering FCUP requests.
 - [ ] **Step 4: Findings and commit.** Write the doc with results, and for Safari a "Root cause hypothesis and smallest fix" paragraph (the Plan 3c input if a fix is needed). Restore the TV state (PIN off, overlay allow).
 
 ```bash

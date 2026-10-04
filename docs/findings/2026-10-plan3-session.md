@@ -38,3 +38,9 @@ Captures: `captures/drive-hls.txt`, `captures/safari-vs-airreceiver.txt` (redact
 
 ## Process notes
 - Never run instrumented tests while the user is casting. The test install restarted the receiver mid-cast (11:51:29), and instrumentation then **force-stopped** the app. A force-stop defeats both `START_STICKY` and `MY_PACKAGE_REPLACED`, so relaunch the app after every `connectedAndroidTest`.
+
+## Addendum: playback when the iPhone locks (12:02–12:17)
+
+- **YouTube (HLS from the phone):** at lock the iPhone sends `POST /rate?value=0` (pause), e.g. 12:07:02, and Sideplay obeys. One session (12:11:12) also ended on the receiver ~17 s after resume (`stopped (player)`), consistent with the phone no longer supplying media playlists over the reverse channel while locked.
+- **Direct URL** (`https://media.w3.org/2010/05/bunny/movie.mp4` opened from Messages, `proc=com.apple.WebKit.GPU`): **keeps playing** with the phone locked; no pause is sent.
+- **Open:** the same YouTube lock test against the Fire TV's AirReceiver, to confirm the pause is YouTube-app behaviour. The user couldn't run it this session; it's added to the Plan 3b device session.

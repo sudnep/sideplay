@@ -1,0 +1,15 @@
+10-04 10:16:45.722 I/AirPlayService( 6257): Server stopped
+10-04 10:16:45.758 I/AirPlayService( 6257): Server started on port 7000
+10-04 10:16:59.356 I/AirPlayService( 6257): Client connected (1)
+10-04 10:16:59.409 I/AirPlayService( 6257): Client disconnected (0)
+10-04 10:17:38.383 I/AirPlayService( 6257): Client connected (1)
+10-04 10:17:38.426 I/AirPlayService( 6257): Client disconnected (0)
+10-04 10:17:56.033 I/AirPlayService( 6257): Client connected (1)
+10-04 10:17:56.106 I/AirPlayService( 6257): Client disconnected (0)
+10-04 10:18:39.562 D/NsdService( 3181): Client disconnected
+10-04 10:18:52.705 I/ActivityTaskManager( 3181): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=io.github.sudnep.sideplay/androidx.activity.ComponentActivity} from uid 10074
+10-04 10:18:54.219 I/ActivityTaskManager( 3181): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=io.github.sudnep.sideplay.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity} from uid 10074
+10-04 10:18:54.694 I/ActivityTaskManager( 3181): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10008000 cmp=io.github.sudnep.sideplay/androidx.activity.ComponentActivity} from uid 10074
+10-04 10:18:55.347 I/ActivityTaskManager( 3181): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10000000 cmp=io.github.sudnep.sideplay.test/androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity} from uid 10074
+10-04 10:19:08.114 I/ActivityTaskManager( 3181): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LAUNCHER] flg=0x10200000 cmp=io.github.sudnep.sideplay/io.github.jqssun.airplay.MainActivity} from uid 2000
+10-04 10:19:13.952 I/AirPlayService(17681): Server started on port 7000

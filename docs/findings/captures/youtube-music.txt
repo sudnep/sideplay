@@ -1,0 +1,120 @@
+10-04 10:12:00.539 I/AirPlayNative( 6257): mirror running: 0
+10-04 10:12:00.590 I/AirPlayService( 6257): Audio mode
+10-04 10:12:00.663 I/AirPlayService( 6257): Client disconnected (0)
+10-04 10:12:17.062 I/AirPlayService( 6257): Client connected (1)
+10-04 10:12:17.066 I/ActivityTaskManager( 3181): START u0 {flg=0x10020000 cmp=io.github.sudnep.sideplay/io.github.jqssun.airplay.MainActivity} from uid 10074
+10-04 10:12:17.317 I/AirPlayService( 6257): Audio mode
+10-04 10:12:17.322 I/AirPlayService( 6257): Audio format: ct=2 spf=352 screen=false
+10-04 10:12:17.644 I/AirPlayService( 6257): Client connected (2)
+10-04 10:12:17.674 I/AirPlayNative( 6257): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 10:12:17.724 I/AirPlayService( 6257): Client connected (3)
+10-04 10:12:17.779 I/AirPlayNative( 6257): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 10:12:17.784 I/AirPlayNative( 6257): AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:17.784 I/AirPlayNative( 6257): AIRCAP PLAY proc=YouTubeMusic start=5.6 body=bplist location=mlhls://localhost/<path>
+10-04 10:12:17.794 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:17.802 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:17.810 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:17.832 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:17.842 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:17.847 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 10:12:17.887 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.029 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.088 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.122 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.196 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.240 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.390 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.505 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.728 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.919 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:18.920 I/AirPlayService( 6257): AirPlay Video play: http://localhost:7000/master.m3u8 @ 5.623665s
+10-04 10:12:18.921 I/ExoPlayerImpl( 6257): Init f541750 [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29]
+10-04 10:12:28.924 I/AirPlayService( 6257): Client connected (4)
+10-04 10:12:28.929 I/AirPlayService( 6257): Client connected (5)
+10-04 10:12:28.932 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 10:12:28.933 I/AirPlayService( 6257): Client disconnected (4)
+10-04 10:12:28.937 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 10:12:28.963 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/232/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 10:12:29.027 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/270/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 10:12:29.035 I/AirPlayService( 6257): Client connected (5)
+10-04 10:12:29.040 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/233/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 10:12:29.060 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 10:12:30.073 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:30.454 W/PesReader( 6257): Unexpected start code prefix: 2162745
+10-04 10:12:31.202 W/PesReader( 6257): Unexpected start code prefix: 2162773
+10-04 10:12:31.351 W/PesReader( 6257): Unexpected start code prefix: 2162801
+10-04 10:12:32.005 W/PesReader( 6257): Unexpected start code prefix: 2162829
+10-04 10:12:32.661 W/PesReader( 6257): Unexpected start code prefix: 2162857
+10-04 10:12:33.356 W/PesReader( 6257): Unexpected start code prefix: 3211461
+10-04 10:12:33.528 W/PesReader( 6257): Unexpected start code prefix: 2162913
+10-04 10:12:34.123 W/PesReader( 6257): Unexpected start code prefix: 2162941
+10-04 10:12:34.831 W/PesReader( 6257): Unexpected start code prefix: 2162969
+10-04 10:12:34.984 W/PesReader( 6257): Unexpected start code prefix: 2162997
+10-04 10:12:35.681 W/PesReader( 6257): Unexpected start code prefix: 2163025
+10-04 10:12:36.747 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:36.751 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:36.757 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:36.761 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:36.766 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:36.770 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:36.780 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:36.784 I/AirPlayNative( 6257): AIRCAP REQ POST /stop handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 10:12:36.784 I/AirPlayService( 6257): AirPlay Video stopped
+10-04 10:12:36.784 I/ExoPlayerImpl( 6257): Release f541750 [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29] [media3.common, media3.exoplayer, media3.decoder, media3.exoplayer.hls, media3.datasource, media3.extractor]
+10-04 10:12:36.796 I/AirPlayService( 6257): Client disconnected (4)
+10-04 10:12:36.800 I/AirPlayService( 6257): Client disconnected (3)
+10-04 10:12:36.842 W/PesReader( 6257): Unexpected start code prefix: 2163053
+10-04 10:12:37.669 I/AirPlayService( 6257): Client connected (4)
+10-04 10:12:37.702 I/AirPlayNative( 6257): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 10:12:37.714 I/AirPlayService( 6257): Client connected (5)
+10-04 10:12:37.734 I/AirPlayNative( 6257): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 10:12:37.738 I/AirPlayNative( 6257): AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.738 I/AirPlayNative( 6257): AIRCAP PLAY proc=YouTubeMusic start=0.0 body=bplist location=mlhls://localhost/<path>
+10-04 10:12:37.745 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.764 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.769 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.775 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.779 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.784 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 10:12:37.795 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.892 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.904 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.915 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:37.986 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:38.022 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:38.089 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:38.193 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:38.266 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:38.267 I/AirPlayService( 6257): AirPlay Video play: http://localhost:7000/master.m3u8 @ 0.0s
+10-04 10:12:38.268 I/ExoPlayerImpl( 6257): Init 3f38d89 [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29]
+10-04 10:12:48.270 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 10:12:48.270 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 10:12:48.271 I/AirPlayService( 6257): Client disconnected (4)
+10-04 10:12:48.289 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/232/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 10:12:48.347 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/233/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 10:12:48.356 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 10:12:48.693 W/PesReader( 6257): Unexpected start code prefix: 2162727
+10-04 10:12:48.740 W/PesReader( 6257): Unexpected start code prefix: 2162765
+10-04 10:12:48.811 W/PesReader( 6257): Unexpected start code prefix: 2162803
+10-04 10:12:48.857 W/PesReader( 6257): Unexpected start code prefix: 2162841
+10-04 10:12:48.896 W/PesReader( 6257): Unexpected start code prefix: 2162881
+10-04 10:12:48.927 W/PesReader( 6257): Unexpected start code prefix: 2162919
+10-04 10:12:48.958 W/PesReader( 6257): Unexpected start code prefix: 2162957
+10-04 10:12:48.995 W/PesReader( 6257): Unexpected start code prefix: 2162995
+10-04 10:12:49.382 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:12:54.934 W/PesReader( 6257): Unexpected start code prefix: 2163035
+10-04 10:13:01.937 W/PesReader( 6257): Unexpected start code prefix: 2163073
+10-04 10:13:07.498 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:13:07.505 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:13:07.510 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:13:08.946 W/PesReader( 6257): Unexpected start code prefix: 2163111
+10-04 10:13:15.945 W/PesReader( 6257): Unexpected start code prefix: 2163149
+10-04 10:13:22.954 W/PesReader( 6257): Unexpected start code prefix: 2163189
+10-04 10:13:22.997 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:13:23.005 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:13:23.010 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:13:29.965 W/PesReader( 6257): Unexpected start code prefix: 2163227
+10-04 10:13:36.969 W/PesReader( 6257): Unexpected start code prefix: 2163265
+10-04 10:13:37.653 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:13:37.664 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 10:13:37.689 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist

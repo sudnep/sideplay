@@ -1,0 +1,222 @@
+10-04 09:39:45.494 I/AirPlayService( 6257): Client connected (5)
+10-04 09:39:45.497 I/AirPlayService( 6257): Client disconnected (4)
+10-04 09:39:45.501 I/AirPlayService( 6257): Client connected (5)
+10-04 09:39:45.504 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:39:45.504 I/AirPlayService( 6257): Client disconnected (4)
+10-04 09:39:45.509 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:39:45.569 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/609/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:39:45.726 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:45.744 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/233/xtags/ChEKBWFjb250EghvcmlnaW5hbAoNCgRsYW5nEgVlbi1VUw/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:39:45.751 I/AirPlayService( 6257): Client connected (5)
+10-04 09:39:45.755 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/605/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:39:46.307 E/MediaCodecVideoRenderer( 6257):       at androidx.media3.exoplayer.ExoPlayerImplInternal.doSomeWork(ExoPlayerImplInternal.java:1483)
+10-04 09:39:46.307 E/MediaCodecVideoRenderer( 6257):       at androidx.media3.exoplayer.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:765)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257): Playback error
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):   androidx.media3.exoplayer.ExoPlaybackException: MediaCodecVideoRenderer error, index=0, format=Format(null, null, video/mp4, video/x-vnd.on2.vp9, vp09.00.21.08.01.05.01.06.00, 390864, und, [360, 640, 25.0, ColorInfo(BT601, Limited range, SDR SMPTE 170M, false, 8bit Luma, 8bit Chroma)], [-1, -1, -1]), format_supported=YES
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.BaseRenderer.createRendererException(BaseRenderer.java:586)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.mediacodec.MediaCodecRenderer.render(MediaCodecRenderer.java:1008)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.video.MediaCodecVideoRenderer.render(MediaCodecVideoRenderer.java:1453)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.RendererHolder.render(RendererHolder.java:418)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.ExoPlayerImplInternal.doSomeWork(ExoPlayerImplInternal.java:1483)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:765)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at android.os.Handler.dispatchMessage(Handler.java:103)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at android.os.Looper.loop(Looper.java:214)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at android.os.HandlerThread.run(HandlerThread.java:67)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):   Caused by: androidx.media3.exoplayer.video.MediaCodecVideoDecoderException: Decoder failed: OMX.MTK.VIDEO.DECODER.VP9
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.video.MediaCodecVideoRenderer.createDecoderException(MediaCodecVideoRenderer.java:2772)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.mediacodec.MediaCodecRenderer.render(MediaCodecRenderer.java:1002)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       ... 7 more
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):   Caused by: java.lang.IllegalStateException
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at android.media.MediaCodec.native_dequeueOutputBuffer(Native Method)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at android.media.MediaCodec.dequeueOutputBuffer(MediaCodec.java:2817)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.mediacodec.SynchronousMediaCodecAdapter.dequeueOutputBufferIndex(SynchronousMediaCodecAdapter.java:113)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.mediacodec.MediaCodecRenderer.drainOutputBuffer(MediaCodecRenderer.java:2245)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.mediacodec.MediaCodecRenderer.render(MediaCodecRenderer.java:978)
+10-04 09:39:46.311 E/ExoPlayerImplInternal( 6257):       ... 7 more
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257): Disable failed.
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):   java.lang.IllegalStateException
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at android.media.MediaCodec.native_flush(Native Method)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at android.media.MediaCodec.flush(MediaCodec.java:2222)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.mediacodec.SynchronousMediaCodecAdapter.flush(SynchronousMediaCodecAdapter.java:161)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.mediacodec.MediaCodecRenderer.flushCodec(MediaCodecRenderer.java:1104)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.mediacodec.MediaCodecRenderer.flushOrReleaseCodec(MediaCodecRenderer.java:1046)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.mediacodec.MediaCodecRenderer.onDisabled(MediaCodecRenderer.java:859)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.video.MediaCodecVideoRenderer.onDisabled(MediaCodecVideoRenderer.java:1210)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.BaseRenderer.disable(BaseRenderer.java:261)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.RendererHolder.disableRenderer(RendererHolder.java:710)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.RendererHolder.disable(RendererHolder.java:594)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.ExoPlayerImplInternal.disableRenderer(ExoPlayerImplInternal.java:2354)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.ExoPlayerImplInternal.disableRenderers(ExoPlayerImplInternal.java:2347)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.ExoPlayerImplInternal.resetInternal(ExoPlayerImplInternal.java:2075)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.ExoPlayerImplInternal.stopInternal(ExoPlayerImplInternal.java:2029)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at androidx.media3.exoplayer.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:970)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at android.os.Handler.dispatchMessage(Handler.java:103)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at android.os.Looper.loop(Looper.java:214)
+10-04 09:39:46.314 E/ExoPlayerImplInternal( 6257):       at android.os.HandlerThread.run(HandlerThread.java:67)
+10-04 09:39:46.382 W/AirPlayVideoPlayer( 6257): 	at androidx.media3.exoplayer.ExoPlayerImplInternal.doSomeWork(ExoPlayerImplInternal.java:1483)
+10-04 09:39:46.382 W/AirPlayVideoPlayer( 6257): 	at androidx.media3.exoplayer.ExoPlayerImplInternal.handleMessage(ExoPlayerImplInternal.java:765)
+10-04 09:39:46.383 W/AirPlayVideoPlayer( 6257): AIRCAP PLAYER_ERROR code=ERROR_CODE_DECODING_FAILED msg=MediaCodecVideoRenderer error, index=0, format=Format(null, null, video/mp4, video/x-vnd.on2.vp9, vp09.00.21.08.01.05.01.06.00, 390864, und, [360, 640, 25.0, ColorInfo(BT601, Limited range, SDR SMPTE 170M, false, 8bit Luma, 8bit Chroma)], [-1, -1, -1]), format_supported=YES cause=androidx.media3.exoplayer.video.MediaCodecVideoDecoderException: Decoder failed: OMX.MTK.VIDEO.DECODER.VP9
+10-04 09:39:46.383 I/AirPlayService( 6257): AirPlay Video stopped (player)
+10-04 09:39:46.391 I/ExoPlayerImpl( 6257): Release 5a25001 [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29] [media3.common, media3.exoplayer, media3.decoder, media3.exoplayer.hls, media3.datasource, media3.extractor]
+10-04 09:39:46.728 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:46.800 I/AirPlayService( 6257): Client disconnected (4)
+10-04 09:39:46.803 I/AirPlayService( 6257): Client disconnected (3)
+10-04 09:39:46.805 I/AirPlayService( 6257): Client disconnected (2)
+10-04 09:39:46.807 I/AirPlayService( 6257): Client disconnected (1)
+10-04 09:39:47.829 I/AirPlayService( 6257): Client connected (2)
+10-04 09:39:47.898 I/AirPlayNative( 6257): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:47.914 I/AirPlayService( 6257): Client connected (3)
+10-04 09:39:47.938 I/AirPlayNative( 6257): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:47.945 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:47.950 I/AirPlayService( 6257): Client disconnected (2)
+10-04 09:39:47.953 I/AirPlayService( 6257): Client disconnected (1)
+10-04 09:39:47.978 I/AirPlayService( 6257): Client disconnected (0)
+10-04 09:40:03.195 I/AirPlayService( 6257): Client connected (1)
+10-04 09:40:03.198 I/ActivityTaskManager( 3181): START u0 {flg=0x10020000 cmp=io.github.sudnep.sideplay/io.github.jqssun.airplay.MainActivity} from uid 10074
+10-04 09:40:03.263 I/AirPlayNative( 6257): mirror running: 1
+10-04 09:40:03.353 I/AirPlayNative( 6257): video_set_codec: 1 (h265_enabled=1)
+10-04 09:40:03.458 I/VideoRenderer( 6257): Video codec started: video/avc 498x1080 (H.264 (OMX.MTK.VIDEO.DECODER.AVC))
+10-04 09:40:22.415 I/AirPlayService( 6257): Client connected (2)
+10-04 09:40:22.421 I/AirPlayNative( 6257): mirror running: 0
+10-04 09:40:22.473 I/AirPlayService( 6257): Audio mode
+10-04 09:40:22.546 I/AirPlayNative( 6257): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:22.662 I/AirPlayService( 6257): Client connected (3)
+10-04 09:40:22.851 I/AirPlayNative( 6257): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:22.974 I/AirPlayNative( 6257): AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:22.974 I/AirPlayNative( 6257): AIRCAP PLAY proc=YouTube start=0.0 body=bplist location=mlhls://localhost/<path>
+10-04 09:40:23.002 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.010 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.016 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.023 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.027 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.032 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.038 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.044 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:23.081 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.314 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.394 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.505 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.607 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.784 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:23.909 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:24.111 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:24.112 I/AirPlayService( 6257): AirPlay Video play: http://localhost:7000/master.m3u8 @ 0.0s
+10-04 09:40:24.112 I/ExoPlayerImpl( 6257): Init 9df5fbb [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29]
+10-04 09:40:34.114 I/AirPlayService( 6257): Client connected (4)
+10-04 09:40:34.117 I/AirPlayService( 6257): Client connected (5)
+10-04 09:40:34.119 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:34.119 I/AirPlayService( 6257): Client disconnected (4)
+10-04 09:40:34.121 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:34.159 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/231/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:34.218 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/233/xtags/ChEKBWFjb250EghvcmlnaW5hbAoNCgRsYW5nEgVlbi1VUw/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:34.292 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:34.615 W/PesReader( 6257): Unexpected start code prefix: 3211303
+10-04 09:40:34.919 W/PesReader( 6257): Unexpected start code prefix: 2162765
+10-04 09:40:34.932 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/312/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:35.390 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:35.393 W/PesReader( 6257): Unexpected start code prefix: 3211375
+10-04 09:40:35.797 W/PesReader( 6257): Unexpected start code prefix: 2162839
+10-04 09:40:35.979 W/PesReader( 6257): Unexpected start code prefix: 2162857
+10-04 09:40:36.127 W/PesReader( 6257): Unexpected start code prefix: 2162879
+10-04 09:40:36.321 W/PesReader( 6257): Unexpected start code prefix: 2162903
+10-04 09:40:36.517 W/PesReader( 6257): Unexpected start code prefix: 3211495
+10-04 09:40:37.024 W/PesReader( 6257): Unexpected start code prefix: 2162957
+10-04 09:40:37.091 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:37.278 W/PesReader( 6257): Unexpected start code prefix: 2162981
+10-04 09:40:38.890 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:40.204 W/PesReader( 6257): Unexpected start code prefix: 2163017
+10-04 09:40:40.372 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:40.911 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:40.917 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:40.922 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:40.928 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:40.932 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:40.950 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:40.960 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:40.965 I/AirPlayNative( 6257): AIRCAP REQ POST /stop handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:40.966 I/AirPlayService( 6257): AirPlay Video stopped
+10-04 09:40:40.966 I/ExoPlayerImpl( 6257): Release 9df5fbb [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29] [media3.common, media3.exoplayer, media3.decoder, media3.exoplayer.hls, media3.datasource, media3.extractor]
+10-04 09:40:40.977 I/AirPlayService( 6257): Client disconnected (3)
+10-04 09:40:40.981 I/AirPlayNative( 6257): mirror running: 1
+10-04 09:40:40.997 I/AirPlayService( 6257): Client disconnected (2)
+10-04 09:40:41.094 I/AirPlayNative( 6257): video_set_codec: 1 (h265_enabled=1)
+10-04 09:40:41.213 I/VideoRenderer( 6257): Video codec started: video/avc 498x1080 (H.264 (OMX.MTK.VIDEO.DECODER.AVC))
+10-04 09:40:41.812 I/AirPlayService( 6257): Client connected (3)
+10-04 09:40:41.822 I/AirPlayNative( 6257): mirror running: 0
+10-04 09:40:41.876 I/AirPlayService( 6257): Audio mode
+10-04 09:40:41.917 I/AirPlayNative( 6257): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:41.944 I/AirPlayService( 6257): Client connected (4)
+10-04 09:40:41.965 I/AirPlayNative( 6257): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:41.979 I/AirPlayNative( 6257): AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:41.979 I/AirPlayNative( 6257): AIRCAP PLAY proc=YouTube start=0.0 body=bplist location=mlhls://localhost/<path>
+10-04 09:40:41.987 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.009 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.015 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.020 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.046 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.050 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:42.064 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.155 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.176 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.192 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.277 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.429 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.528 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.954 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:42.955 I/AirPlayService( 6257): AirPlay Video play: http://localhost:7000/master.m3u8 @ 0.0s
+10-04 09:40:42.955 I/ExoPlayerImpl( 6257): Init abada92 [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29]
+10-04 09:40:52.958 I/AirPlayService( 6257): Client connected (5)
+10-04 09:40:52.961 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:52.961 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:52.961 I/AirPlayService( 6257): Client disconnected (4)
+10-04 09:40:52.995 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/231/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:53.047 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/312/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:53.058 I/AirPlayService( 6257): Client connected (5)
+10-04 09:40:53.061 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/233/xtags/ChEKBWFjb250EghvcmlnaW5hbAoNCgRsYW5nEgVlbi1VUw/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:40:53.539 W/PesReader( 6257): Unexpected start code prefix: 3211303
+10-04 09:40:53.847 W/PesReader( 6257): Unexpected start code prefix: 3211341
+10-04 09:40:53.865 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:54.166 W/PesReader( 6257): Unexpected start code prefix: 3211375
+10-04 09:40:54.526 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:54.540 W/PesReader( 6257): Unexpected start code prefix: 2162839
+10-04 09:40:54.729 W/PesReader( 6257): Unexpected start code prefix: 2162857
+10-04 09:40:54.881 W/PesReader( 6257): Unexpected start code prefix: 2162879
+10-04 09:40:55.050 W/PesReader( 6257): Unexpected start code prefix: 2162903
+10-04 09:40:55.196 W/PesReader( 6257): Unexpected start code prefix: 3211495
+10-04 09:40:55.669 W/PesReader( 6257): Unexpected start code prefix: 2162957
+10-04 09:40:55.894 W/PesReader( 6257): Unexpected start code prefix: 2162981
+10-04 09:40:57.086 W/PesReader( 6257): Unexpected start code prefix: 2163017
+10-04 09:40:57.780 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:57.811 I/AirPlayNative( 6257): AIRCAP REQ POST /stop handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:57.811 I/AirPlayService( 6257): AirPlay Video stopped
+10-04 09:40:57.812 I/ExoPlayerImpl( 6257): Release abada92 [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29] [media3.common, media3.exoplayer, media3.decoder, media3.exoplayer.hls, media3.datasource, media3.extractor]
+10-04 09:40:57.820 I/AirPlayNative( 6257): mirror running: 1
+10-04 09:40:57.833 I/AirPlayService( 6257): Client disconnected (4)
+10-04 09:40:57.835 I/AirPlayService( 6257): Client disconnected (3)
+10-04 09:40:57.884 I/AirPlayService( 6257): Client connected (4)
+10-04 09:40:57.893 I/AirPlayNative( 6257): mirror running: 0
+10-04 09:40:57.894 I/AirPlayService( 6257): Audio mode
+10-04 09:40:57.918 I/AirPlayNative( 6257): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:57.934 I/AirPlayService( 6257): Client connected (5)
+10-04 09:40:58.018 I/AirPlayNative( 6257): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:58.021 I/AirPlayNative( 6257): AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:58.021 I/AirPlayNative( 6257): AIRCAP PLAY proc=YouTube start=0.0 body=bplist location=mlhls://localhost/<path>
+10-04 09:40:58.031 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:58.050 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:58.057 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:58.062 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:58.069 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:58.075 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:58.080 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:58.100 I/AirPlayService( 6257): Client disconnected (4)
+10-04 09:40:58.103 I/AirPlayService( 6257): Client disconnected (3)
+10-04 09:40:58.106 I/AirPlayService( 6257): Client disconnected (2)
+10-04 09:40:58.108 I/AirPlayService( 6257): Client disconnected (1)
+10-04 09:40:58.123 I/AirPlayService( 6257): Client connected (2)
+10-04 09:40:58.151 I/AirPlayNative( 6257): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:58.193 I/AirPlayService( 6257): Client connected (3)
+10-04 09:40:58.220 I/AirPlayNative( 6257): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:40:58.226 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:40:58.232 I/AirPlayService( 6257): Client disconnected (2)
+10-04 09:40:58.234 I/AirPlayService( 6257): Client disconnected (1)
+10-04 09:40:58.269 I/AirPlayService( 6257): Client disconnected (0)

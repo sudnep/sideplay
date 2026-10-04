@@ -1,0 +1,10 @@
+10-04 09:05:03.014 I/AirPlayService( 6257): Client connected (1)
+10-04 09:05:03.027 I/ActivityTaskManager( 3181): START u0 {flg=0x10020000 cmp=io.github.sudnep.sideplay/io.github.jqssun.airplay.MainActivity} from uid 10074
+10-04 09:05:03.030 W/ActivityTaskManager( 3181): Background activity start [callingPackage: io.github.sudnep.sideplay; callingUid: 10074; isCallingUidForeground: false; isCallingUidPersistentSystemProcess: false; realCallingUid: 10074; isRealCallingUidForeground: false; isRealCallingUidPersistentSystemProcess: false; originatingPendingIntent: null; isBgStartWhitelisted: false; intent: Intent { flg=0x10020000 cmp=io.github.sudnep.sideplay/io.github.jqssun.airplay.MainActivity }; callerApp: ProcessRecord{cb21eb9 6257:io.github.sudnep.sideplay/u0a74}]
+10-04 09:05:03.212 I/AirPlayNative( 6257): mirror running: 1
+10-04 09:05:03.303 I/AirPlayNative( 6257): video_set_codec: 1 (h265_enabled=1)
+10-04 09:05:03.533 I/VideoRenderer( 6257): Video codec started: video/avc 498x1080 (H.264 (OMX.MTK.VIDEO.DECODER.AVC))
+10-04 09:05:03.556 W/VideoRenderer( 6257): Codec error, resetting
+10-04 09:05:23.494 I/AirPlayNative( 6257): mirror running: 0
+10-04 09:05:23.495 I/AirPlayService( 6257): Audio mode
+10-04 09:05:23.560 I/AirPlayService( 6257): Client disconnected (0)

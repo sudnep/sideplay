@@ -1,0 +1,70 @@
+10-04 09:37:10.355 I/AirPlayService( 6257): Client connected (1)
+10-04 09:37:10.369 I/ActivityTaskManager( 3181): START u0 {flg=0x10020000 cmp=io.github.sudnep.sideplay/io.github.jqssun.airplay.MainActivity} from uid 10074
+10-04 09:37:10.370 W/ActivityTaskManager( 3181): Background activity start [callingPackage: io.github.sudnep.sideplay; callingUid: 10074; isCallingUidForeground: false; isCallingUidPersistentSystemProcess: false; realCallingUid: 10074; isRealCallingUidForeground: false; isRealCallingUidPersistentSystemProcess: false; originatingPendingIntent: null; isBgStartWhitelisted: false; intent: Intent { flg=0x10020000 cmp=io.github.sudnep.sideplay/io.github.jqssun.airplay.MainActivity }; callerApp: ProcessRecord{cb21eb9 6257:io.github.sudnep.sideplay/u0a74}]
+10-04 09:37:10.508 I/AirPlayNative( 6257): mirror running: 1
+10-04 09:37:10.643 I/AirPlayNative( 6257): video_set_codec: 1 (h265_enabled=1)
+10-04 09:37:10.725 I/VideoRenderer( 6257): Video codec started: video/avc 498x1080 (H.264 (OMX.MTK.VIDEO.DECODER.AVC))
+10-04 09:38:22.888 I/ActivityTaskManager( 3181): START u0 {act=android.intent.action.MAIN cat=[android.intent.category.LEANBACK_LAUNCHER] flg=0x10000000 pkg=io.github.sudnep.sideplay cmp=io.github.sudnep.sideplay/io.github.jqssun.airplay.MainActivity} from uid 10055
+10-04 09:39:23.200 I/AirPlayService( 6257): Client connected (2)
+10-04 09:39:23.209 I/AirPlayNative( 6257): mirror running: 0
+10-04 09:39:23.266 I/AirPlayService( 6257): Audio mode
+10-04 09:39:23.308 I/AirPlayNative( 6257): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:23.329 I/AirPlayService( 6257): Client connected (3)
+10-04 09:39:23.350 I/AirPlayNative( 6257): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:23.373 I/AirPlayNative( 6257): AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.373 I/AirPlayNative( 6257): AIRCAP PLAY proc=YouTube start=8.0 body=bplist location=mlhls://localhost/<path>
+10-04 09:39:23.384 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.387 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.391 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.395 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.399 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:23.407 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.497 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.512 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.550 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.616 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.684 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.740 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:23.790 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:24.150 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:24.151 I/AirPlayService( 6257): AirPlay Video play: http://localhost:7000/master.m3u8 @ 7.957293s
+10-04 09:39:24.199 I/ExoPlayerImpl( 6257): Init b4deb5c [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29]
+10-04 09:39:34.156 I/AirPlayService( 6257): Client connected (4)
+10-04 09:39:34.159 I/AirPlayService( 6257): Client connected (5)
+10-04 09:39:34.163 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:39:34.175 I/AirPlayService( 6257): Client disconnected (4)
+10-04 09:39:34.177 I/AirPlayNative( 6257): AIRCAP REQ GET /master.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:39:34.233 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:34.238 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:34.241 I/AirPlayNative( 6257): AIRCAP REQ POST /getProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:34.247 I/AirPlayService( 6257): Client disconnected (3)
+10-04 09:39:34.252 I/AirPlayNative( 6257): mirror running: 1
+10-04 09:39:34.285 I/AirPlayService( 6257): Client disconnected (2)
+10-04 09:39:34.305 I/AirPlayNative( 6257): AIRCAP REQ GET /itag/605/mediadata.m3u8 handled=1 hls=1 ua=Dalvik/2.1.0 (Linux; U; Android 10; SmartTV 4K FFM Build/QTG3.200902.001) ct=-
+10-04 09:39:34.436 I/AirPlayNative( 6257): video_set_codec: 1 (h265_enabled=1)
+10-04 09:39:34.549 I/AirPlayService( 6257): Client connected (3)
+10-04 09:39:34.552 I/VideoRenderer( 6257): Video codec started: video/avc 498x1080 (H.264 (OMX.MTK.VIDEO.DECODER.AVC))
+10-04 09:39:34.565 I/AirPlayNative( 6257): mirror running: 0
+10-04 09:39:34.620 I/AirPlayService( 6257): Audio mode
+10-04 09:39:34.649 I/AirPlayNative( 6257): AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:34.666 I/AirPlayService( 6257): Client connected (4)
+10-04 09:39:34.684 I/AirPlayNative( 6257): AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:34.710 I/AirPlayNative( 6257): AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:34.710 I/AirPlayNative( 6257): AIRCAP PLAY proc=YouTube start=0.0 body=bplist location=mlhls://localhost/<path>
+10-04 09:39:34.733 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:34.741 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:34.747 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:34.774 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:34.779 I/AirPlayNative( 6257): AIRCAP REQ PUT /setProperty?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:34.784 I/AirPlayNative( 6257): AIRCAP REQ POST /rate?<redacted> handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+10-04 09:39:34.797 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:35.122 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:35.170 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:35.244 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:35.297 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:35.356 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:35.433 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:35.490 I/AirPlayNative( 6257): AIRCAP REQ POST /action handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+10-04 09:39:35.491 I/ExoPlayerImpl( 6257): Release b4deb5c [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29] [media3.common, media3.exoplayer, media3.decoder, media3.exoplayer.hls, media3.datasource]
+10-04 09:39:35.491 I/AirPlayService( 6257): AirPlay Video play: http://localhost:7000/master.m3u8 @ 0.0s
+10-04 09:39:35.499 I/ExoPlayerImpl( 6257): Init 5a25001 [AndroidXMedia3/1.11.0-beta01] [huangshan, SmartTV 4K FFM, Hisense, 29]

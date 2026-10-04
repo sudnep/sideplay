@@ -1,0 +1,8 @@
+10-04 10:10:09.343 I/AirPlayService( 6257): Client connected (1)
+10-04 10:10:09.347 I/ActivityTaskManager( 3181): START u0 {flg=0x10020000 cmp=io.github.sudnep.sideplay/io.github.jqssun.airplay.MainActivity} from uid 10074
+10-04 10:10:09.516 I/AirPlayNative( 6257): mirror running: 1
+10-04 10:10:09.710 I/AirPlayNative( 6257): video_set_codec: 1 (h265_enabled=1)
+10-04 10:10:09.799 I/VideoRenderer( 6257): Video codec started: video/avc 1920x1080 (H.264 (OMX.MTK.VIDEO.DECODER.AVC))
+10-04 10:10:13.739 I/AirPlayService( 6257): Audio format: ct=8 spf=480 screen=true
+10-04 10:10:24.472 I/AirPlayService( 6257): Audio format: ct=8 spf=480 screen=true
+10-04 10:10:25.857 I/AirPlayService( 6257): Audio format: ct=8 spf=480 screen=true

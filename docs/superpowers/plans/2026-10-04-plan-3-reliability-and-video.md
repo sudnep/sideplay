@@ -713,6 +713,41 @@ Co-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>"
 
 ---
 
+### Task 8: TV-only app (remove the phone/tablet side)
+
+The user decided on 2026-10-04 that the app targets Android TV only. The phone UI, touch gestures and video downloader are removed, and the manifest makes Play offer the app to TVs only.
+
+**Files:**
+- Delete: `app/src/main/kotlin/io/github/jqssun/airplay/ui/MainScreen.kt`, `ui/SettingsScreen.kt`, `ui/VideoControls.kt`, `ui/LogsScreen.kt`, `ui/PlaybackSpeedSelector.kt`, `ui/gestures/` (all), `download/VideoDownloader.kt`
+- Modify: `MainActivity.kt` (always `TvApp`), `viewmodel/MainViewModel.kt` and `service/AirPlayService.kt` (remove members only the deleted UI used), `ui/Tv.kt` (drop `isTv()`/`isTvDevice()` if unused), `AndroidManifest.xml`, `res/values/strings.xml` (drop strings only the deleted UI used)
+
+- [ ] **Step 1: Baseline.** `./gw :app:testDebugUnitTest :app:assembleDebug` passes. Record the unit test count.
+- [ ] **Step 2: Delete the phone UI files and the downloader**, then make `MainActivity.setContent` always use `TvApp` (remove the `tv` switch, the `MainScreen` import and `isTvDevice`).
+- [ ] **Step 3: Remove dead members.** Build, and fix compile errors by removing the downloader hooks: `videoDownloader` and `downloadVideo()` in the service, `videoDownloadProgress` and `toggleVideoDownload()` in the ViewModel. Then list every public `fun`/`val` in `MainViewModel.kt` with no remaining reference outside its own file:
+```bash
+cd app/src/main/kotlin/io/github/jqssun/airplay
+for n in $(grep -oE "^\s+(fun|val) [a-zA-Z_]+" viewmodel/MainViewModel.kt | awk '{print $2}' | sort -u); do
+  c=$(grep -rlw "$n" --include=*.kt . | grep -v viewmodel/MainViewModel.kt | wc -l); [ "$c" -eq 0 ] && echo "$n"
+done
+```
+Remove each listed member, and its private backing field, unless it is used inside the ViewModel by something still referenced. Do the same check for `service/AirPlayService.kt` public members referenced only by the deleted files. Rebuild after each batch.
+- [ ] **Step 4: Manifest.** Set `<uses-feature android:name="android.software.leanback" android:required="true" />`, keep touchscreen and faketouch `required="false"`, and remove `<category android:name="android.intent.category.LAUNCHER" />` (keep `LEANBACK_LAUNCHER`). Verify:
+```bash
+~/Library/Android/sdk/build-tools/36.0.0/aapt2 dump badging app/build/outputs/apk/debug/app-debug.apk | grep -E "uses-feature|launchable"
+```
+Expected: `uses-feature: name='android.software.leanback'` (required), `leanback-launchable-activity`, and no plain `launchable-activity`.
+- [ ] **Step 5: Strings.** Remove string resources no longer referenced (`grep -rn "R.string.<name>"` per candidate; the lint task `./gw :app:lintDebug` lists `UnusedResources` and can be used instead).
+- [ ] **Step 6: Verify.** `./gw :app:testDebugUnitTest` (same count as Step 1), `./gw :app:assembleDebug assembleRelease`, and the full instrumented suite on the Hisense. Then install and screenshot Idle, Settings and Troubleshooting to check nothing regressed. Report the line count removed (`git diff --stat`).
+- [ ] **Step 7: Commit.**
+```bash
+git add -A app/src/main
+git commit -m "refactor: TV-only app; remove phone UI, gestures and video downloader
+
+Co-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>"
+```
+
+---
+
 ## Done when
 
 - `./gw :app:testDebugUnitTest` passes (+5 StartPolicy, +4 ServerName, +1 net OverlayAccess, +3 ConnectLaunch), and the full instrumented suite passes on the Hisense.

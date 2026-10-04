@@ -51,6 +51,8 @@ class DecoderSelector(private val ctx: Context) {
             // k1 tablets partially accelerate hevc
             if (Build.VERSION.SDK_INT >= 26 && Build.DEVICE.lowercase() !in listOf("shieldtablet", "mocha")) add("omx.nvidia")
             if (Build.VERSION.SDK_INT >= 26 && Build.DEVICE.startsWith("BRAVIA_")) add("omx.mtk")
+            // mediatek tv socs (mt58xx/mt96xx) share the bravia decoder; phone mt67xx/mt68xx stay excluded
+            if (Build.VERSION.SDK_INT >= 26 && isMediatekTvSoc(Build.HARDWARE, Build.BOARD)) add("omx.mtk")
             if (Build.VERSION.SDK_INT >= 28 && !Build.DEVICE.equals("sabrina", ignoreCase = true)) add("omx.amlogic")
             if (Build.VERSION.SDK_INT >= 28) add("omx.realtek")
             add("c2.")
@@ -196,5 +198,10 @@ class DecoderSelector(private val ctx: Context) {
         )
 
         fun MediaCodecInfo.videoCaps(mime: String): VideoCapabilities = getCapabilitiesForType(mime).videoCapabilities
+
+        private val mediatekTvSoc = Regex("mt[59]\\d{3}", RegexOption.IGNORE_CASE)
+
+        fun isMediatekTvSoc(hardware: String?, board: String?): Boolean =
+            listOfNotNull(hardware, board).any { mediatekTvSoc.matches(it.trim()) }
     }
 }

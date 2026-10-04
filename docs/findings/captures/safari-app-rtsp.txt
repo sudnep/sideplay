@@ -1,0 +1,42 @@
+# Safari app → Sideplay, AirPlay video (2026-10-04 12:37, Plan 3b build; /feedback and /action lines omitted, peer + session ids redacted)
+12:37:48.683 I/AirPlayService: Client connected (4)
+12:37:48.703 I/AirPlayNative: AIRCAP RTSP POST /pair-verify handled=1 ct=application/octet-stream
+12:37:48.746 I/AirPlayNative: AIRCAP RTSP POST /pair-verify handled=1 ct=application/octet-stream
+12:37:48.752 I/AirPlayNative: AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+12:37:48.777 I/AirPlayService: Client connected (5)
+12:37:48.970 I/AirPlayNative: AIRCAP RTSP POST /pair-verify handled=1 ct=application/octet-stream
+12:37:48.983 I/AirPlayNative: AIRCAP RTSP POST /pair-verify handled=1 ct=application/octet-stream
+12:37:48.991 I/AirPlayNative: AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+12:37:48.995 I/AirPlayNative: AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:37:48.995 I/AirPlayNative: AIRCAP PLAY proc=com.apple.WebKit.GPU start=0.0 body=bplist location=https://media.w3.org/2010/05/bunny/movie.mp4
+12:37:49.009 I/AirPlayService: AirPlay Video play: https://media.w3.org/2010/05/bunny/movie.mp4 @ 0.0s
+12:37:49.657 I/AirPlayNative: AIRCAP REQ PUT /setProperty?selectedMediaArray handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:37:49.662 I/AirPlayNative: AIRCAP REQ PUT /setProperty?actionAtItemEnd handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:37:49.677 W/AirPlayVideoPlayer: AIRCAP TRACK type=2 selected=true container=video/mp4 sample=video/avc codecs=avc1.4D401E 853x480
+12:37:49.677 W/AirPlayVideoPlayer: AIRCAP TRACK type=1 selected=true container=video/mp4 sample=audio/mp4a-latm codecs=mp4a.40.2 -1x-1
+12:37:49.774 I/AirPlayNative: AIRCAP REQ PUT /setProperty?forwardEndTime handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:37:49.778 I/AirPlayNative: AIRCAP REQ PUT /setProperty?reverseEndTime handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:37:49.782 I/AirPlayNative: AIRCAP REQ POST /rate?value=1.000000 handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+12:37:52.195 I/AirPlayNative: AIRCAP REQ POST /rate?value=0.000000 handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+12:37:52.200 I/AirPlayService: Client disconnected (4)
+12:37:52.204 I/AirPlayService: Client disconnected (3)
+12:38:03.296 I/AirPlayService: Client connected (4)
+12:38:03.345 I/AirPlayNative: AIRCAP RTSP POST /pair-verify handled=1 ct=application/octet-stream
+12:38:03.378 I/AirPlayNative: AIRCAP RTSP POST /pair-verify handled=1 ct=application/octet-stream
+12:38:03.389 I/AirPlayNative: AIRCAP REQ GET /server-info handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+12:38:03.406 I/AirPlayService: Client connected (5)
+12:38:03.413 I/AirPlayNative: AIRCAP RTSP POST /pair-verify handled=1 ct=application/octet-stream
+12:38:03.424 I/AirPlayNative: AIRCAP RTSP POST /pair-verify handled=1 ct=application/octet-stream
+12:38:03.429 I/AirPlayNative: AIRCAP REQ POST /reverse handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+12:38:03.433 I/AirPlayNative: AIRCAP REQ POST /play handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:38:03.433 I/AirPlayNative: AIRCAP PLAY proc=com.apple.WebKit.GPU start=0.0 body=bplist location=https://media.w3.org/2010/05/bunny/movie.mp4
+12:38:03.448 I/AirPlayService: AirPlay Video play: https://media.w3.org/2010/05/bunny/movie.mp4 @ 0.0s
+12:38:03.972 I/AirPlayNative: AIRCAP REQ PUT /setProperty?selectedMediaArray handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:38:03.976 I/AirPlayNative: AIRCAP REQ PUT /setProperty?actionAtItemEnd handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:38:03.997 W/AirPlayVideoPlayer: AIRCAP TRACK type=2 selected=true container=video/mp4 sample=video/avc codecs=avc1.4D401E 853x480
+12:38:03.997 W/AirPlayVideoPlayer: AIRCAP TRACK type=1 selected=true container=video/mp4 sample=audio/mp4a-latm codecs=mp4a.40.2 -1x-1
+12:38:04.054 I/AirPlayNative: AIRCAP REQ PUT /setProperty?forwardEndTime handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:38:04.058 I/AirPlayNative: AIRCAP REQ PUT /setProperty?reverseEndTime handled=1 hls=0 ua=AirPlay/980.77.1 ct=application/x-apple-binary-plist
+12:38:04.095 I/AirPlayNative: AIRCAP REQ POST /rate?value=1.000000 handled=1 hls=0 ua=AirPlay/980.77.1 ct=-
+12:38:34.290 I/AirPlayService: Client disconnected (4)
+12:38:34.315 I/AirPlayService: Client disconnected (3)

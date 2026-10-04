@@ -49,7 +49,7 @@ JNIEXPORT jlong JNICALL
 Java_io_github_jqssun_airplay_bridge_NativeBridge_nativeInit(
         JNIEnv *env, jobject thiz,
         jobject callback, jbyteArray hwAddr, jstring name, jstring keyFile,
-        jboolean nohold, jboolean requirePin) {
+        jboolean nohold, jboolean requirePin, jint pinArg) {
 
     server_ctx_t *ctx = new server_ctx_t();
 
@@ -90,7 +90,8 @@ Java_io_github_jqssun_airplay_bridge_NativeBridge_nativeInit(
 
     if (requirePin) {
         /* avoid UxPlay's random-PIN retry path: use one random PIN for this server run */
-        int pin = random_pin();
+        /* the service passes a per-install pin: iphones cache the code, so a new one per run locks them out */
+        int pin = (pinArg >= 0 && pinArg <= 9999) ? (int) pinArg : random_pin();
         if (pin < 0) {
             LOGE("Failed to generate random pin");
             pin = 1234;

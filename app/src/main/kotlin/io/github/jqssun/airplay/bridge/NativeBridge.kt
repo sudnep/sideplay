@@ -11,7 +11,8 @@ object NativeBridge {
         name: String,
         keyFile: String,
         nohold: Boolean,
-        requirePin: Boolean
+        requirePin: Boolean,
+        pin: Int
     ): Long
 
     external fun nativeStart(handle: Long, port: Int): Int

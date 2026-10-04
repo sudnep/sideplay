@@ -368,7 +368,11 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
             audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_SAMPLE_RATE)?.toIntOrNull() ?: 0,
             audioManager.getProperty(AudioManager.PROPERTY_OUTPUT_FRAMES_PER_BUFFER)?.toIntOrNull() ?: 0
         )
-        nativeHandle = NativeBridge.nativeInit(this, hwAddr, effectiveName, keyFile, nohold, requirePin)
+        val pinResult = PersistentPin.resolve(prefs.getInt(Prefs.PAIRING_PIN, Prefs.DEF_PAIRING_PIN)) {
+            java.security.SecureRandom().nextInt(10_000)
+        }
+        if (pinResult.generated) prefs.edit().putInt(Prefs.PAIRING_PIN, pinResult.pin).apply()
+        nativeHandle = NativeBridge.nativeInit(this, hwAddr, effectiveName, keyFile, nohold, requirePin, pinResult.pin)
         if (nativeHandle == 0L) {
             log("Native init failed")
             _failStart()

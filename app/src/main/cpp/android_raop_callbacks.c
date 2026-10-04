@@ -284,9 +284,12 @@ static void _mirror_video_running(void *cls, bool running) {
 static void _register_client(void *cls, const char *device_id, const char *pk_str, const char *name) {
     android_callback_ctx_t *ctx = (android_callback_ctx_t *)cls;
     (void)device_id; (void)name;
-    /* pin pairing succeeded: the tv can drop the code now, even if no stream follows yet */
-    JNIEnv *env = _get_env(ctx);
-    if (env && ctx->on_pin_paired) (*env)->CallVoidMethod(env, ctx->callback_obj, ctx->on_pin_paired);
+    /* pin pairing succeeded: the tv can drop the code now, even if no stream follows yet.
+       register_client also runs for every first SETUP, so only report it in pin mode */
+    if (ctx->require_pin) {
+        JNIEnv *env = _get_env(ctx);
+        if (env && ctx->on_pin_paired) (*env)->CallVoidMethod(env, ctx->callback_obj, ctx->on_pin_paired);
+    }
     if (ctx->registered_count >= 16) return;
     for (int i = 0; i < ctx->registered_count; i++) {
         if (ctx->registered_keys[i] && strcmp(ctx->registered_keys[i], pk_str) == 0) return;

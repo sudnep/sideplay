@@ -331,13 +331,17 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        if (intent?.action == ACTION_START_SERVER) {
+        val decision = StartPolicy.decide(
+            intent?.action, ACTION_START_SERVER,
+            runInBackground = prefs.getBoolean(Prefs.RUN_IN_BACKGROUND, Prefs.DEF_RUN_IN_BACKGROUND),
+        )
+        if (decision.startServer) {
             promoteToForeground()
             val name = prefs.getString(Prefs.SERVER_NAME, null) ?: ServerName.default(this)
             startServer(name, ensureServiceStarted = false)
             if (_serverState.value != ServerState.RUNNING) stopSelf(startId)
         }
-        return START_NOT_STICKY
+        return if (decision.sticky) START_STICKY else START_NOT_STICKY
     }
 
     fun startServer(name: String) {

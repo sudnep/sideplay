@@ -24,6 +24,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import io.github.jqssun.airplay.service.AirPlayService
 import io.github.jqssun.airplay.ui.MainScreen
+import io.github.jqssun.airplay.ui.isTvDevice
+import io.github.jqssun.airplay.ui.tv.TvApp
 import io.github.jqssun.airplay.ui.theme.AirPlayTheme
 import io.github.jqssun.airplay.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -105,15 +107,24 @@ class MainActivity : ComponentActivity() {
             }
         }
 
+        val tv = isTvDevice()
         setContent {
             AirPlayTheme {
-                MainScreen(
-                    viewModel = viewModel,
-                    isInPip = isInPip.value,
-                    onSurfaceAvailable = { viewModel.onSurfaceAvailable(it) },
-                    onSurfaceDestroyed = { viewModel.onSurfaceDestroyed(it) },
-                    onPip = { enterPip() }
-                )
+                if (tv) {
+                    TvApp(
+                        viewModel = viewModel,
+                        onSurfaceAvailable = { viewModel.onSurfaceAvailable(it) },
+                        onSurfaceDestroyed = { viewModel.onSurfaceDestroyed(it) },
+                    )
+                } else {
+                    MainScreen(
+                        viewModel = viewModel,
+                        isInPip = isInPip.value,
+                        onSurfaceAvailable = { viewModel.onSurfaceAvailable(it) },
+                        onSurfaceDestroyed = { viewModel.onSurfaceDestroyed(it) },
+                        onPip = { enterPip() }
+                    )
+                }
             }
         }
     }

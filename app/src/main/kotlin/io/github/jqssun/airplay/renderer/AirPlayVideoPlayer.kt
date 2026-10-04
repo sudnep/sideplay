@@ -34,6 +34,8 @@ class AirPlayVideoPlayer(private val context: Context) {
 
     private val mainHandler = Handler(Looper.getMainLooper())
     private var player: ExoPlayer? = null
+    // one h264/hevc retry per /play after a vp9 decoder failure
+    private var _vp9Retried = false
     private var pendingSurface: Surface? = null
 
     var onPlaybackInfo: ((PlaybackSnapshot) -> Unit)? = null
@@ -53,6 +55,21 @@ class AirPlayVideoPlayer(private val context: Context) {
             Log.w(TAG, "playback error", error)
             if (BuildConfig.DEBUG) {
                 Log.w(TAG, "AIRCAP PLAYER_ERROR code=${error.errorCodeName} msg=${error.message} cause=${error.cause}")
+            }
+            val failedMime = (error as? androidx.media3.exoplayer.ExoPlaybackException)?.rendererFormat?.sampleMimeType
+            val decodingFailed = error.errorCode == androidx.media3.common.PlaybackException.ERROR_CODE_DECODING_FAILED
+            val p = player
+            if (p != null && VideoSizeCap.shouldRetryWithoutVp9(decodingFailed, failedMime, _vp9Retried)) {
+                _vp9Retried = true
+                Log.w(TAG, "vp9 decode failed; retrying with h264/hevc preferred")
+                val pos = p.currentPosition
+                p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
+                    .setPreferredVideoMimeTypes(androidx.media3.common.MimeTypes.VIDEO_H264, androidx.media3.common.MimeTypes.VIDEO_H265)
+                    .build()
+                p.prepare()
+                p.seekTo(pos)
+                p.play()
+                return
             }
             onEnded?.invoke()
         }
@@ -91,6 +108,12 @@ class AirPlayVideoPlayer(private val context: Context) {
             pendingSurface?.let { s -> it.setVideoSurface(s) }
         }
         player = p
+        _vp9Retried = false
+        VideoSizeCap.limit(VideoSizeCap.decoderLimits())?.let { cap ->
+            p.trackSelectionParameters = p.trackSelectionParameters.buildUpon()
+                .setMaxVideoSize(cap.width, cap.height)
+                .build()
+        }
         p.setMediaItem(MediaItem.fromUri(location), (startPositionSeconds * 1000).toLong())
         p.playWhenReady = true
         p.prepare()

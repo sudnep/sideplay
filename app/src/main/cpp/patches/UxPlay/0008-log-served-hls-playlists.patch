@@ -1,29 +1,50 @@
 diff --git a/lib/http_handlers.h b/lib/http_handlers.h
-index 1e7afb3..1ab522e 100644
+index 1e7afb3..d7c1277 100644
 --- a/lib/http_handlers.h
 +++ b/lib/http_handlers.h
-@@ -963,6 +963,34 @@ http_handler_play(raop_conn_t *conn, http_request_t *request, http_response_t *r
+@@ -963,6 +963,55 @@ http_handler_play(raop_conn_t *conn, http_request_t *request, http_response_t *r
     Media Playlist, taken from the Master Playlist, with the uri prefix removed.  
  */ 
  
 +#ifndef NDEBUG
-+/* AIRCAP: log a served playlist line by line (debug only); query strings may carry signed tokens */
++/* AIRCAP: log a served playlist line by line (debug only). playlist urls carry signed tokens in the query
++   *and* in path segments (/sig/.../expire/...), and queries contain commas, so for absolute urls keep only
++   scheme://host (the local proxy keeps its path, which is just the itag), and for relative ones drop
++   everything from '?' to the end of the token */
 +static void aircap_log_playlist(raop_t *raop, const char *kind, const char *url, const char *text) {
 +    char line[512];
++    const size_t cap = sizeof(line) - 1;
 +    int n = 0;
 +    const char *p = text;
 +    while (p && *p && n < 80) {
 +        const char *eol = strchr(p, '\n');
 +        size_t len = eol ? (size_t) (eol - p) : strlen(p);
-+        size_t o = 0;
-+        for (size_t i = 0; i < len && o < sizeof(line) - 1; i++) {
-+            if (p[i] == '?') {
-+                while (i < len && p[i] != '"' && p[i] != ',') i++;
-+                if (o + 11 < sizeof(line) - 1) { memcpy(line + o, "?<redacted>", 11); o += 11; }
-+                if (i < len && o < sizeof(line) - 1) line[o++] = p[i];
++        size_t o = 0, i = 0;
++        while (i < len && o < cap) {
++            if (i + 3 <= len && p[i] == ':' && p[i + 1] == '/' && p[i + 2] == '/') {
++                size_t j = i + 3, host = j;
++                while (j < len && p[j] != '/' && p[j] != '"' && p[j] != '?') j++;
++                int local = (j - host >= 9 && !strncmp(p + host, "localhost", 9)) ||
++                            (j - host >= 9 && !strncmp(p + host, "127.0.0.1", 9));
++                for (size_t k = i; k < j && o < cap; k++) line[o++] = p[k];
++                if (local) {
++                    while (j < len && p[j] != '"' && p[j] != '?' && o < cap) line[o++] = p[j++];
++                } else {
++                    for (const char *t = "/<path>"; *t && o < cap; t++) line[o++] = *t;
++                }
++                if (j < len && p[j] != '"') {
++                    if (p[j] == '?') for (const char *t = "?<redacted>"; *t && o < cap; t++) line[o++] = *t;
++                    while (j < len && p[j] != '"') j++;
++                }
++                i = j;
 +                continue;
 +            }
-+            line[o++] = p[i];
++            if (p[i] == '?') {
++                for (const char *t = "?<redacted>"; *t && o < cap; t++) line[o++] = *t;
++                while (i < len && p[i] != '"') i++;
++                continue;
++            }
++            line[o++] = p[i++];
 +        }
 +        line[o] = '\0';
 +        logger_log(raop->logger, LOGGER_ERR, "AIRCAP HLS %s %s %d: %s", kind, url, n, line);
@@ -37,7 +58,7 @@ index 1e7afb3..1ab522e 100644
  static void
  http_handler_hls(raop_conn_t *conn,  http_request_t *request, http_response_t *response,
                   char **response_data, int *response_datalen) {
-@@ -999,6 +1027,9 @@ http_handler_hls(raop_conn_t *conn,  http_request_t *request, http_response_t *r
+@@ -999,6 +1048,9 @@ http_handler_hls(raop_conn_t *conn,  http_request_t *request, http_response_t *r
              free(master_playlist);
              *response_data = data;
              *response_datalen = (int ) len;
@@ -47,7 +68,7 @@ index 1e7afb3..1ab522e 100644
          } else {
              logger_log(raop->logger, LOGGER_ERR,"requested master playlist %s not found", url); 
          }
-@@ -1014,6 +1045,9 @@ http_handler_hls(raop_conn_t *conn,  http_request_t *request, http_response_t *r
+@@ -1014,6 +1066,9 @@ http_handler_hls(raop_conn_t *conn,  http_request_t *request, http_response_t *r
              free(media_playlist);
              *response_data = data;
              *response_datalen = strlen(data);

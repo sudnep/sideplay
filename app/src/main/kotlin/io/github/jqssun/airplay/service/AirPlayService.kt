@@ -745,6 +745,11 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
         _updateMediaNotification()
     }
 
+    override fun onPinPaired() {
+        log("PIN pairing completed")
+        clearPin()
+    }
+
     override fun onMetadata(data: ByteArray) {
         val map = DmapParser.parse(data)
         val info = TrackInfo.fromDmap(map, _trackInfo.value.coverArt)

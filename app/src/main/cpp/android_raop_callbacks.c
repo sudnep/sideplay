@@ -59,6 +59,7 @@ void android_callbacks_init(android_callback_ctx_t *ctx, JNIEnv *env, jobject ca
     ctx->on_conn_destroy = (*env)->GetMethodID(env, cls, "onConnectionDestroy", "()V");
     ctx->on_conn_reset = (*env)->GetMethodID(env, cls, "onConnectionReset", "(I)V");
     ctx->on_display_pin = (*env)->GetMethodID(env, cls, "onDisplayPin", "(Ljava/lang/String;)V");
+    ctx->on_pin_paired = (*env)->GetMethodID(env, cls, "onPinPaired", "()V");
     ctx->on_metadata = (*env)->GetMethodID(env, cls, "onMetadata", "([B)V");
     ctx->on_coverart = (*env)->GetMethodID(env, cls, "onCoverArt", "([B)V");
     ctx->on_progress = (*env)->GetMethodID(env, cls, "onProgress", "(JJJ)V");
@@ -283,6 +284,9 @@ static void _mirror_video_running(void *cls, bool running) {
 static void _register_client(void *cls, const char *device_id, const char *pk_str, const char *name) {
     android_callback_ctx_t *ctx = (android_callback_ctx_t *)cls;
     (void)device_id; (void)name;
+    /* pin pairing succeeded: the tv can drop the code now, even if no stream follows yet */
+    JNIEnv *env = _get_env(ctx);
+    if (env && ctx->on_pin_paired) (*env)->CallVoidMethod(env, ctx->callback_obj, ctx->on_pin_paired);
     if (ctx->registered_count >= 16) return;
     for (int i = 0; i < ctx->registered_count; i++) {
         if (ctx->registered_keys[i] && strcmp(ctx->registered_keys[i], pk_str) == 0) return;

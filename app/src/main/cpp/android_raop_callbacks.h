@@ -24,6 +24,7 @@ typedef struct {
     jmethodID on_conn_destroy;
     jmethodID on_conn_reset;
     jmethodID on_display_pin;
+    jmethodID on_pin_paired;
     jmethodID on_metadata;
     jmethodID on_coverart;
     jmethodID on_progress;

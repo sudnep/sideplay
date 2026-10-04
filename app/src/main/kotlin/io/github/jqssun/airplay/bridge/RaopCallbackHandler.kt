@@ -11,6 +11,8 @@ interface RaopCallbackHandler {
     fun onConnectionDestroy()
     fun onConnectionReset(reason: Int)
     fun onDisplayPin(pin: String)
+    // pin pairing completed (native register_client)
+    fun onPinPaired()
     fun onMetadata(data: ByteArray)
     fun onCoverArt(data: ByteArray)
     fun onProgress(start: Long, curr: Long, end: Long)

@@ -148,9 +148,9 @@ fun TvApp(
                 TvVideoScreen(
                     state = TvVideoState(title, playing, buffering, pending = !videoActive && videoPending, position, duration),
                     surface = playbackSurface,
-                    onTogglePlay = { viewModel.toggleVideoPlayPause(showOverlay = false) },
-                    onPlay = { viewModel.setVideoPlaying(true, showOverlay = false) },
-                    onPause = { viewModel.setVideoPlaying(false, showOverlay = false) },
+                    onTogglePlay = { viewModel.toggleVideoPlayPause() },
+                    onPlay = { viewModel.setVideoPlaying(true) },
+                    onPause = { viewModel.setVideoPlaying(false) },
                     onSeekBy = { viewModel.seekVideoBy(it) },
                     onStop = { viewModel.stopVideoPlayback() },
                 )

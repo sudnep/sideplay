@@ -1,7 +1,6 @@
 package io.github.jqssun.airplay.renderer
 
 import io.github.jqssun.airplay.bridge.NativeBridge
-import io.github.jqssun.airplay.viewmodel.AudioDebug
 
 // wrapper around native audio engine
 class AudioRenderer {
@@ -52,31 +51,6 @@ class AudioRenderer {
             config.forceSwAlac, config.realtimePriority, config.lowLatency, config.benchmarkLog)
     }
 
-    private val debugBuf = java.nio.ByteBuffer.allocateDirect(DEBUG_BUF_BYTES)
-        .order(java.nio.ByteOrder.LITTLE_ENDIAN)
-
-    // field order/width must mirror native packed AudioDebugData exactly
-    @Synchronized
-    fun audioDebug(): AudioDebug? {
-        if (serverHandle == 0L) return null
-        if (!NativeBridge.nativeServerAudioDebug(serverHandle, debugBuf)) return null
-        val buf = debugBuf
-        buf.rewind()
-        val backlogMs = buf.short.toInt() and 0xFFFF
-        val tunedCushionMs = buf.short.toInt() and 0xFFFF
-        val trims = buf.int
-        val drops = buf.int
-        val silences = buf.int
-        val underruns = buf.int
-        val meanUs = buf.int
-        val maxUs = buf.int
-        val held = buf.short.toInt() and 0xFFFF
-        val xrun = buf.int
-        val decodeErrors = buf.int
-        return AudioDebug(backlogMs, tunedCushionMs, trims, drops, silences, underruns, xrun,
-                          meanUs, maxUs, held, decodeErrors)
-    }
-
     @Synchronized
     fun setFormat(ct: Int, spf: Int) {
         codecLabel = when (ct) {
@@ -86,8 +60,6 @@ class AudioRenderer {
     }
 
     companion object {
-        // must be >= native sizeof(AudioDebugData) (38 B)
-        private const val DEBUG_BUF_BYTES = 64
         const val CT_ALAC = 2
         const val CT_AAC_LC = 4
         const val CT_AAC_ELD = 8

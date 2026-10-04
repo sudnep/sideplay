@@ -45,11 +45,9 @@ import io.github.jqssun.airplay.bridge.LogListener
 import io.github.jqssun.airplay.bridge.NativeBridge
 import io.github.jqssun.airplay.bridge.RaopCallbackHandler
 import io.github.jqssun.airplay.discovery.NsdServiceManager
-import io.github.jqssun.airplay.download.VideoDownloader
 import io.github.jqssun.airplay.renderer.AirPlayVideoPlayer
 import io.github.jqssun.airplay.renderer.AudioRenderer
 import io.github.jqssun.airplay.renderer.VideoRenderer
-import io.github.jqssun.airplay.viewmodel.DebugInfo
 import java.net.NetworkInterface
 import java.security.SecureRandom
 import kotlin.math.abs
@@ -80,11 +78,9 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
     val audioRenderer = AudioRenderer()
     private val audioManager by lazy { getSystemService(Context.AUDIO_SERVICE) as AudioManager }
     val airPlayVideoPlayer by lazy { AirPlayVideoPlayer(this) }
-    val videoDownloader by lazy { VideoDownloader(this) }
 
     // hls urls point at the native httpd, valid only while the session lives
     private val _videoLocation = MutableStateFlow<String?>(null)
-    val videoLocation = _videoLocation.asStateFlow()
 
     private val prefs: SharedPreferences by lazy {
         getSharedPreferences(Prefs.NAME, Context.MODE_PRIVATE)
@@ -99,7 +95,6 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
     val videoAspect = _videoAspect.asStateFlow()
 
     private val _videoResolution = MutableStateFlow("")
-    val videoResolution = _videoResolution.asStateFlow()
 
     private val _audioOnly = MutableStateFlow(false)
     val audioOnly = _audioOnly.asStateFlow()
@@ -118,7 +113,6 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
     val videoPlaybackAspect = _videoPlaybackAspect.asStateFlow()
 
     private val _videoPlaybackSize = MutableStateFlow<Pair<Int, Int>?>(null)
-    val videoPlaybackSize = _videoPlaybackSize.asStateFlow()
 
     // container/manifest metadata
     private val _videoTitle = MutableStateFlow("")
@@ -547,31 +541,11 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
         airPlayVideoPlayer.setPlaying(playing)
     }
 
-    fun seekVideoTo(positionMs: Long) {
-        airPlayVideoPlayer.scrub(positionMs / 1000f)
-    }
-
-    fun setVideoScrubbing(enabled: Boolean) {
-        airPlayVideoPlayer.setScrubbing(enabled)
-    }
-
-    fun setVideoSpeed(speed: Float) {
-        airPlayVideoPlayer.setSpeed(speed)
-    }
-
-    fun setVideoSkipSilence(enabled: Boolean) {
-        airPlayVideoPlayer.setSkipSilence(enabled)
-    }
-
     fun seekVideoBy(deltaMs: Long) {
         airPlayVideoPlayer.seekBy(deltaMs)
     }
 
     fun stopVideoPlayback() = _endVideoPlayback("AirPlay Video stopped (local)")
-
-    fun downloadVideo() {
-        _videoLocation.value?.let { videoDownloader.start(it) }
-    }
 
     private fun _endVideoPlayback(message: String) {
         if (!_videoPlaybackActive.value) return
@@ -939,21 +913,6 @@ class AirPlayService : LifecycleService(), RaopCallbackHandler, LogListener {
         pinRelay.acknowledge()
         _updateMediaNotification()
     }
-
-    fun collectDebugInfo() = DebugInfo(
-        videoCodec = videoRenderer.codecName,
-        videoRes = _videoResolution.value,
-        videoFps = videoRenderer.fps,
-        videoBitrate = videoRenderer.bitrateBps,
-        videoFrames = videoRenderer.frameCount,
-        droppedFrames = videoRenderer.droppedFrames,
-        framePacingJitterUs = videoRenderer.framePacingJitterUs,
-        audioCodec = audioRenderer.codecLabel,
-        audioVolume = 100 * audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) /
-            audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC),
-        audio = audioRenderer.audioDebug(),
-        connections = _connectionCount.value,
-    )
 
     // helpers
 

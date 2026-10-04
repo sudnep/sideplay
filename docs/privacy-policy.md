@@ -40,6 +40,6 @@ If this policy changes, the new version will be published at this address with a
 
 ## Contact
 
-Questions about this policy can be sent through the app's Google Play listing (developer contact).
+Questions about this policy: support@luklalogic.ai
 
 Sideplay is not affiliated with or endorsed by Apple Inc. AirPlay, iPhone and iPad are trademarks of Apple Inc.

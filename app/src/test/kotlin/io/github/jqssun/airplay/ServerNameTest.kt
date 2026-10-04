@@ -35,4 +35,22 @@ class ServerNameTest {
 
     @Test fun truncationDropsTrailingSpace() =
         assertEquals("A".repeat(49), ServerName.choose("A".repeat(49) + " " + "B".repeat(10), null, null))
+
+    @Test fun suffixAppended() =
+        assertEquals("Living Room TV (AirPlay)", ServerName.withAirPlaySuffix("Living Room TV"))
+
+    @Test fun suffixedNameFitsByTrimmingTheBase() {
+        val name = ServerName.withAirPlaySuffix("A".repeat(50))
+        assertEquals(ServerName.MAX_BYTES, name.toByteArray(Charsets.UTF_8).size)
+        assertTrue(name.endsWith(ServerName.SUFFIX))
+    }
+
+    @Test fun suffixTrimNeverSplitsMultiByteCharacters() {
+        val name = ServerName.withAirPlaySuffix("📺".repeat(20))
+        assertTrue(name.toByteArray(Charsets.UTF_8).size <= ServerName.MAX_BYTES)
+        assertEquals("📺".repeat(10) + ServerName.SUFFIX, name) // 40 + 10 bytes
+    }
+
+    @Test fun suffixNotDoubled() =
+        assertEquals("Den (AirPlay)", ServerName.withAirPlaySuffix("Den (AirPlay)"))
 }

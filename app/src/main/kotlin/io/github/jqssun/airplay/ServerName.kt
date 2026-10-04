@@ -27,11 +27,20 @@ object ServerName {
     fun default(context: Context): String {
         val deviceName = if (Build.VERSION.SDK_INT >= 25)
             Settings.Global.getString(context.contentResolver, Settings.Global.DEVICE_NAME) else null
-        return choose(deviceName, Build.MANUFACTURER, Build.MODEL)
+        return withAirPlaySuffix(choose(deviceName, Build.MANUFACTURER, Build.MODEL))
     }
 
-    private fun truncate(name: String): String {
-        if (name.toByteArray(Charsets.UTF_8).size <= MAX_BYTES) return name
+    // tells sideplay apart from the tv's built-in chromecast, which uses the same device name
+    const val SUFFIX = " (AirPlay)"
+
+    fun withAirPlaySuffix(base: String): String {
+        if (base.endsWith(SUFFIX)) return truncate(base)
+        val room = MAX_BYTES - SUFFIX.toByteArray(Charsets.UTF_8).size
+        return truncate(base, room) + SUFFIX
+    }
+
+    private fun truncate(name: String, maxBytes: Int = MAX_BYTES): String {
+        if (name.toByteArray(Charsets.UTF_8).size <= maxBytes) return name
         val out = StringBuilder()
         var bytes = 0
         var i = 0
@@ -39,7 +48,7 @@ object ServerName {
             val cp = name.codePointAt(i)
             val chunk = String(Character.toChars(cp))
             val n = chunk.toByteArray(Charsets.UTF_8).size
-            if (bytes + n > MAX_BYTES) break
+            if (bytes + n > maxBytes) break
             out.append(chunk)
             bytes += n
             i += Character.charCount(cp)

@@ -689,6 +689,30 @@ Co-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>"
 
 ---
 
+### Task 7: New app icon and TV banner
+
+The user asked for a new icon (2026-10-04); the current launcher icon and banner are jqssun's.
+
+**Files:**
+- Replace: `app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml`, `ic_launcher_round.xml` and their foreground/background drawables (find them with `ls app/src/main/res/mipmap-* app/src/main/res/drawable*`)
+- Replace: `app/src/main/res/drawable*/banner*` (TV banner, 320×180 dp)
+- Create: `docs/design/icon-concepts/` (concept PNGs shown to the user)
+
+**Constraints:** no Apple AirPlay glyph (rectangle + triangle) and no Apple marks; vector drawables only; readable at 48 dp; the banner shows the "Sideplay" wordmark.
+
+- [ ] **Step 1:** Draw 3 distinct concepts as SVG, render them to PNG (icon at 512 px plus a banner), and show them to the user with AskUserQuestion (previews). Stop until the user picks one or asks for changes.
+- [ ] **Step 2:** Convert the chosen concept to adaptive-icon vector XML (foreground plus solid background) and a banner vector, replacing the files above. Keep resource names the same so the manifest is unchanged.
+- [ ] **Step 3:** `./gw :app:assembleDebug`, install, then screenshot the Google TV launcher's app row (`adb exec-out screencap`) to check the banner and icon render. Commit:
+
+```bash
+git add app/src/main/res docs/design/icon-concepts
+git commit -m "feat: Sideplay icon and TV banner
+
+Co-Authored-By: Claude Opus 5.5 (1M context) <noreply@anthropic.com>"
+```
+
+---
+
 ## Done when
 
 - `./gw :app:testDebugUnitTest` passes (+5 StartPolicy, +4 ServerName, +1 net OverlayAccess, +3 ConnectLaunch), and the full instrumented suite passes on the Hisense.

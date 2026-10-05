@@ -11,3 +11,10 @@
 
 *.jks
 .omc/
+
+# fastlane
+/vendor/bundle/
+fastlane/report.xml
+fastlane/README.md
+*.json.key
+play-service-account.json

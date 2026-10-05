@@ -1,5 +1,7 @@
 # Play Store listing — Sideplay
 
+The live source for the listing text and graphics is `fastlane/metadata/android/en-US/` (push with `bundle exec fastlane metadata`). This page keeps the reasoning and the Console-only answers.
+
 **App name (30):** Sideplay for AirPlay
 
 **Short description (80):** Show your iPhone or iPad on your Android TV. Free, no ads, no account.
@@ -22,14 +24,14 @@ Your phone and TV must be on the same Wi-Fi network. Some apps, such as Google D
 
 Sideplay is not affiliated with or endorsed by Apple Inc. AirPlay, iPhone and iPad are trademarks of Apple Inc.
 
-## Graphics (this folder)
+## Graphics (in `fastlane/metadata/android/en-US/`)
 
 | Asset | File | Size |
 |---|---|---|
-| App icon | `icon-512.png` | 512×512 |
-| Feature graphic | `feature-graphic-1024x500.png` | 1024×500 |
-| TV banner | `tv-banner-1280x720.png` | 1280×720 |
-| TV screenshots | `screenshots/01-ready.png`, `screenshots/02-settings.png` | 1920×1080 |
+| App icon | `images/icon.png` | 512×512 |
+| Feature graphic | `images/featureGraphic.png` | 1024×500 |
+| TV banner | `images/tvBanner.png` | 1280×720 |
+| TV screenshots | `images/tvScreenshots/` | 1920×1080 |
 
 Sources for the generated graphics are in `src/` (render with headless Chrome at device scale 1).
 

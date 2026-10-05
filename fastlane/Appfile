@@ -1,0 +1,3 @@
+# the key lives outside the repo; override with SUPPLY_JSON_KEY in CI
+json_key_file(ENV.fetch("SUPPLY_JSON_KEY", File.expand_path("~/.config/sideplay/play-service-account.json")))
+package_name("io.github.sudnep.sideplay")

@@ -34,7 +34,8 @@ android {
         applicationId = "io.github.sudnep.sideplay"
         minSdk = 24
         targetSdk = 36
-        versionCode = 1
+        // fastlane passes -PversionCode=<next> so each Play upload gets a fresh code
+        versionCode = (project.findProperty("versionCode") as String?)?.toInt() ?: 1
         versionName = "0.1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 

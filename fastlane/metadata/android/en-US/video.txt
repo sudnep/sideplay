@@ -1,1 +1,0 @@
-https://github.com/jqssun/android-airplay-server/releases/download/v0.0.1/demo.mp4

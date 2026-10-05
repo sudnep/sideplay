@@ -1,0 +1,51 @@
+default_platform(:android)
+
+platform :android do
+  AAB = "app/build/outputs/bundle/release/app-release.aab"
+
+  desc "Run the JVM unit tests"
+  lane :test do
+    gradle(task: ":app:testDebugUnitTest", gradle_path: "./gw")
+  end
+
+  desc "Test, build a signed AAB with the next version code, upload it to Internal testing"
+  lane :internal do
+    test
+    codes = %w[internal alpha beta production].flat_map do |t|
+      google_play_track_version_codes(track: t)
+    rescue StandardError
+      []
+    end
+    next_code = (codes.map(&:to_i).max || 0) + 1
+    UI.message("Building version code #{next_code}")
+    gradle(task: ":app:bundleRelease", gradle_path: "./gw", properties: { "versionCode" => next_code.to_s })
+    upload_to_play_store(
+      track: "internal",
+      aab: AAB,
+      release_status: "draft",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Move the latest Internal build to another track: fastlane promote to:beta|production"
+  lane :promote do |options|
+    to = options.fetch(:to)
+    UI.user_error!("to: must be alpha, beta or production") unless %w[alpha beta production].include?(to)
+    upload_to_play_store(
+      track: "internal",
+      track_promote_to: to,
+      release_status: "draft",
+      skip_upload_changelogs: true,
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+
+  desc "Push the store listing text and graphics from fastlane/metadata"
+  lane :metadata do
+    upload_to_play_store(skip_upload_aab: true, skip_upload_apk: true, skip_upload_changelogs: true)
+  end
+end

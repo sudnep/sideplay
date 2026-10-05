@@ -1,11 +1,13 @@
-- Screen mirroring with H.264 and H.265 (HEVC) video decoding
-- Audio streaming with AAC-ELD, AAC-LC and ALAC audio decoding
-- Video playback with support for HLS, downloads, and remote controls
-- Music playback with track information, cover art, and remote controls
-- Support for Android TV with directional pad navigation and seeking controls
-- Support for Picture-in-Picture, automatic resolution and mode switching
-- Optional PIN authentication
-- Video resolution, overscan, and frame rate control
-- Audio latency control and support for software decoder fallback
-- Debug overlay with real-time statistics (FPS, bitrate, codec, resolution, frame count, audio volume, etc.)
-- Android native media session integration with notification controls
+Sideplay turns your Android TV or Google TV into a receiver for AirPlay, so your iPhone or iPad can show its screen or play videos on the big screen.
+
+• Screen Mirroring: open Control Center, tap Screen Mirroring, choose your TV.
+• Videos: tap the AirPlay icon in apps such as YouTube, Photos and Safari, and the video plays on the TV while your phone stays free.
+• Music: AirPlay audio plays on the TV with the album art and track title.
+• Optional on-screen code, so only people in the room can connect.
+• Starts with the TV, so it's ready whenever you are.
+
+Free and open source (GPL-3.0). No ads, no account, no tracking. Everything stays on your home network.
+
+Your phone and TV must be on the same Wi-Fi network. Some apps, such as Google Drive, send only audio over AirPlay; use Screen Mirroring for those.
+
+Sideplay is not affiliated with or endorsed by Apple Inc. AirPlay, iPhone and iPad are trademarks of Apple Inc.

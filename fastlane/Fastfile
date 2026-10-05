@@ -33,10 +33,15 @@ platform :android do
   lane :promote do |options|
     to = options.fetch(:to)
     UI.user_error!("to: must be alpha, beta or production") unless %w[alpha beta production].include?(to)
+    # pick by version code so a draft internal release can be promoted too
+    code = options[:version_code] || google_play_track_version_codes(track: "internal").map(&:to_i).max
+    UI.user_error!("No internal build to promote") unless code
     upload_to_play_store(
       track: "internal",
+      version_code: code,
       track_promote_to: to,
-      release_status: "draft",
+      # the promoted release lands as a draft; send it for review in Play Console
+      track_promote_release_status: "draft",
       skip_upload_changelogs: true,
       skip_upload_metadata: true,
       skip_upload_images: true,

@@ -46,6 +46,15 @@ platform :android do
 
   desc "Push the store listing text and graphics from fastlane/metadata"
   lane :metadata do
-    upload_to_play_store(skip_upload_aab: true, skip_upload_apk: true, skip_upload_changelogs: true)
+    # supply ties a listing update to a release, so point it at the newest internal build
+    code = google_play_track_version_codes(track: "internal").map(&:to_i).max
+    UI.user_error!("No internal build yet; run `fastlane internal` first") unless code
+    upload_to_play_store(
+      track: "internal",
+      version_code: code,
+      skip_upload_aab: true,
+      skip_upload_apk: true,
+      skip_upload_changelogs: true
+    )
   end
 end

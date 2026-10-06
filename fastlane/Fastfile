@@ -22,6 +22,7 @@ platform :android do
     upload_to_play_store(
       track: "internal",
       aab: AAB,
+      skip_upload_apk: true,
       release_status: "draft",
       skip_upload_metadata: true,
       skip_upload_images: true,

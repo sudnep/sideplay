@@ -9,6 +9,10 @@ const ORIGIN = "https://sideplay.luklalogic.ai";
 // path on disk -> canonical URL path
 export const PAGES = [
   ["index.html", "/"],
+  ["setup/index.html", "/setup/"],
+  ["privacy/index.html", "/privacy/"],
+  ["support/index.html", "/support/"],
+  ["404.html", "/404.html"],
 ];
 const DISCLAIMER = "Sideplay is not affiliated with or endorsed by Apple Inc. AirPlay, iPhone and iPad are trademarks of Apple Inc.";
 
@@ -74,4 +78,18 @@ test("home: Play badge links to the listing", () => {
   const html = read("index.html");
   assert.ok(html.includes('href="https://play.google.com/store/apps/details?id=io.github.sudnep.sideplay"'));
   assert.ok(html.includes('"@type": "SoftwareApplication"'));
+});
+
+test("privacy page matches docs/privacy-policy.md", () => {
+  const md = readFileSync(new URL("../../docs/privacy-policy.md", import.meta.url), "utf8");
+  const html = read("privacy/index.html");
+  const date = md.match(/Effective date: (.+)/)[1].trim();
+  assert.ok(html.includes(`Effective ${date}`), `effective date ${date}`);
+  assert.ok(html.includes("support@luklalogic.ai"));
+  assert.match(html, /This website sets no cookies and uses no analytics\./);
+  for (const heading of md.matchAll(/^## (.+)$/gm)) assert.ok(html.includes(`<h2>${heading[1]}</h2>`), heading[1]);
+});
+
+test("404 page is not indexed", () => {
+  assert.match(read("404.html"), /<meta name="robots" content="noindex">/);
 });

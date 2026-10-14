@@ -30,6 +30,10 @@ Sideplay uses these Android permissions only to work as a receiver:
 | Notifications | Show that the receiver is running and when a device wants to connect |
 | Display over other apps | Bring Sideplay to the front when a device starts casting, if you allow it |
 
+## This website
+
+This website sets no cookies and uses no analytics. It is served by Cloudflare, which processes standard request data (such as IP addresses) to deliver and protect the site.
+
 ## Children
 
 Sideplay does not collect information from anyone, including children.

@@ -1,5 +1,7 @@
 # Sideplay
 
+Website: https://sideplay.luklalogic.ai · Privacy: https://sideplay.luklalogic.ai/privacy/
+
 A free, open-source receiver for AirPlay on Android TV and Google TV. Mirror an iPhone, iPad or Mac screen, or send videos to your TV.
 
 Sideplay is not affiliated with, endorsed by, or sponsored by Apple Inc. AirPlay is a trademark of Apple Inc.

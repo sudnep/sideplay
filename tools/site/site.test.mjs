@@ -93,3 +93,22 @@ test("privacy page matches docs/privacy-policy.md", () => {
 test("404 page is not indexed", () => {
   assert.match(read("404.html"), /<meta name="robots" content="noindex">/);
 });
+
+test("sitemap lists exactly the indexable pages", () => {
+  const xml = read("sitemap.xml");
+  const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]).sort();
+  assert.deepEqual(locs, ["/", "/privacy/", "/setup/", "/support/"].map((p) => ORIGIN + p).sort());
+});
+
+test("robots points at the sitemap", () => {
+  assert.match(read("robots.txt"), /Sitemap: https:\/\/sideplay\.luklalogic\.ai\/sitemap\.xml/);
+});
+
+test("wrangler serves site/ on the custom domain with a 404 page", () => {
+  const cfg = JSON.parse(readFileSync(new URL("../../wrangler.jsonc", import.meta.url), "utf8").replace(/^\s*\/\/.*$/gm, ""));
+  assert.equal(cfg.name, "sideplay-site");
+  assert.equal(cfg.assets.directory, "./site");
+  assert.equal(cfg.assets.not_found_handling, "404-page");
+  assert.deepEqual(cfg.routes, [{ pattern: "sideplay.luklalogic.ai", custom_domain: true }]);
+  assert.equal(cfg.main, undefined);
+});

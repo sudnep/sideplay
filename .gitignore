@@ -18,3 +18,4 @@ fastlane/report.xml
 fastlane/README.md
 *.json.key
 play-service-account.json
+.wrangler/

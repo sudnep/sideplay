@@ -1,0 +1,10 @@
+{
+  // Static site for https://sideplay.luklalogic.ai (no Worker script). Deploy: npx wrangler deploy
+  "name": "sideplay-site",
+  "compatibility_date": "2026-10-13",
+  "assets": {
+    "directory": "./site",
+    "not_found_handling": "404-page"
+  },
+  "routes": [{ "pattern": "sideplay.luklalogic.ai", "custom_domain": true }]
+}

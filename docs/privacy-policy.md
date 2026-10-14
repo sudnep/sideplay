@@ -1,6 +1,6 @@
 # Sideplay privacy policy
 
-Effective date: October 4, 2026
+Effective date: October 13, 2026
 
 Sideplay is a free, open-source app for Android TV that lets an iPhone or iPad show its screen, videos and music on your TV over AirPlay. This policy explains what happens to your information when you use it.
 
@@ -32,7 +32,7 @@ Sideplay uses these Android permissions only to work as a receiver:
 
 ## This website
 
-This website sets no cookies and uses no analytics. It is served by Cloudflare, which processes standard request data (such as IP addresses) to deliver and protect the site.
+This website sets no cookies and uses no analytics. It is served by Cloudflare, which processes standard request data (such as IP addresses) to deliver and protect the site. It remembers your light/dark choice in your browser only.
 
 ## Children
 

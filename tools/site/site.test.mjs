@@ -112,3 +112,34 @@ test("wrangler serves site/ on the custom domain with a 404 page", () => {
   assert.deepEqual(cfg.routes, [{ pattern: "sideplay.luklalogic.ai", custom_domain: true }]);
   assert.equal(cfg.main, undefined);
 });
+
+// Review fixes: the site must describe the app as it really is.
+const appString = (name) =>
+  readFileSync(new URL("../../app/src/main/res/values/strings.xml", import.meta.url), "utf8")
+    .match(new RegExp(`<string name="${name}">([^<]+)</string>`))[1].replace(/\\'/g, "'");
+
+test("setup names the app's real auto-open buttons", () => {
+  const html = read("setup/index.html");
+  assert.ok(html.includes(appString("tv_idle_allow_auto_open")), "allow auto-open label");
+  assert.ok(html.includes(appString("tv_idle_open_app_settings").replace(/'/g, "&#39;")) || html.includes(appString("tv_idle_open_app_settings")), "app settings label");
+  assert.doesNotMatch(html, /Allow auto-open/);
+});
+
+test("Control Center instructions work on every iPhone", () => {
+  for (const [file] of PAGES) assert.doesNotMatch(read(file), /swipe down from the top-right/i, file);
+});
+
+test("privacy page discloses the theme setting the site stores", () => {
+  const usesStorage = PAGES.some(([file]) => read(file).includes("localStorage"));
+  const md = readFileSync(new URL("../../docs/privacy-policy.md", import.meta.url), "utf8");
+  if (usesStorage) {
+    assert.match(read("privacy/index.html"), /light\/dark choice in your browser/);
+    assert.match(md, /light\/dark choice in your browser/);
+  }
+});
+
+test("privacy effective date covers the website section (added 2026-10-13)", () => {
+  const md = readFileSync(new URL("../../docs/privacy-policy.md", import.meta.url), "utf8");
+  const date = new Date(md.match(/Effective date: (.+)/)[1].trim());
+  assert.ok(date >= new Date("October 13, 2026"), `effective date ${date.toDateString()} predates the website section`);
+});
